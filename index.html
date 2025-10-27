@@ -38,38 +38,34 @@
       }
 
       .shortcut-card:hover {
-          transform: translateY(-5px); /* Pequeña elevación */
-          background-color: var(--phoenix-body-bg-dark); /* Un color de fondo sutil del tema */
-          box-shadow: var(--phoenix-box-shadow-lg); /* Sombra más grande al pasar el ratón */
+          transform: translateY(-5px);
+          background-color: var(--phoenix-body-bg-dark);
+          box-shadow: var(--phoenix-box-shadow-lg);
       }
 
-      /* Color y tamaño de los iconos en el modo oscuro (por defecto) */
       [data-bs-theme="dark"] .shortcut-icon .feather,
       [data-bs-theme="dark"] .shortcut-icon .fas {
-          font-size: 28px; /* Haz los iconos un poco más grandes */
+          font-size: 28px;
           width: 28px;
           height: 28px;
-          color: var(--phoenix-primary); /* Usa el color primario del tema Phoenix */
+          color: var(--phoenix-primary);
       }
 
-      /* Color y tamaño de los iconos en el modo claro */
       [data-bs-theme="light"] .shortcut-icon .feather,
       [data-bs-theme="light"] .shortcut-icon .fas {
-          font-size: 28px; /* Haz los iconos un poco más grandes */
+          font-size: 28px;
           width: 28px;
           height: 28px;
-          color: var(--phoenix-primary); /* Usa el color primario del tema Phoenix */
+          color: var(--phoenix-primary);
       }
 
-      /* Asegura que el texto dentro de la tarjeta no cambie de color inesperadamente */
       .shortcut-card .text-body,
       .shortcut-card .text-body-tertiary {
-          color: inherit; /* Hereda el color del texto del body, se adapta al tema */
+          color: inherit;
       }
 
-      /* Ajuste para los títulos de las tarjetas */
       .shortcut-card h5 {
-          color: var(--bs-heading-color); /* Usa el color de los encabezados del tema */
+          color: var(--bs-heading-color);
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
