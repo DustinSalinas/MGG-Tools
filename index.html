@@ -38,34 +38,38 @@
       }
 
       .shortcut-card:hover {
-          transform: translateY(-5px);
-          background-color: var(--phoenix-body-bg-dark);
-          box-shadow: var(--phoenix-box-shadow-lg);
+          transform: translateY(-5px); /* Pequeña elevación */
+          background-color: var(--phoenix-body-bg-dark); /* Un color de fondo sutil del tema */
+          box-shadow: var(--phoenix-box-shadow-lg); /* Sombra más grande al pasar el ratón */
       }
 
+      /* Color y tamaño de los iconos en el modo oscuro (por defecto) */
       [data-bs-theme="dark"] .shortcut-icon .feather,
       [data-bs-theme="dark"] .shortcut-icon .fas {
-          font-size: 28px;
+          font-size: 28px; /* Haz los iconos un poco más grandes */
           width: 28px;
           height: 28px;
-          color: var(--phoenix-primary);
+          color: var(--phoenix-primary); /* Usa el color primario del tema Phoenix */
       }
 
+      /* Color y tamaño de los iconos en el modo claro */
       [data-bs-theme="light"] .shortcut-icon .feather,
       [data-bs-theme="light"] .shortcut-icon .fas {
-          font-size: 28px;
+          font-size: 28px; /* Haz los iconos un poco más grandes */
           width: 28px;
           height: 28px;
-          color: var(--phoenix-primary);
+          color: var(--phoenix-primary); /* Usa el color primario del tema Phoenix */
       }
 
+      /* Asegura que el texto dentro de la tarjeta no cambie de color inesperadamente */
       .shortcut-card .text-body,
       .shortcut-card .text-body-tertiary {
-          color: inherit;
+          color: inherit; /* Hereda el color del texto del body, se adapta al tema */
       }
 
+      /* Ajuste para los títulos de las tarjetas */
       .shortcut-card h5 {
-          color: var(--bs-heading-color);
+          color: var(--bs-heading-color); /* Usa el color de los encabezados del tema */
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -108,11 +112,9 @@
           <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
               <li class="nav-item">
-                <!-- parent pages-->
-                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="index.html" role="button" data-bs-toggle="" aria-expanded="false">
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/" role="button" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fa-solid fa-house"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Home</span></span></div>
-                  </a></div><!-- parent pages-->
-              </li>
+                  </a></div></li>
               <li class="nav-item">
                 <!-- label-->
                 <p class="navbar-vertical-label">Apps</p>
@@ -128,6 +130,12 @@
                   </a></div><!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="/top-mutants" role="button" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-trophy"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Top Mutants</span></span></div>
+                  </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/battle" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-fist-raised tool-icon"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Damage Simulator</span></span></div>
+                  </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/test" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fa-solid fa-question"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Coming Soon</span></span></div>
                   </a></div><!-- parent pages-->
               </li>
               <li class="nav-item">
@@ -150,7 +158,7 @@
         <div class="collapse navbar-collapse justify-content-between">
           <div class="navbar-logo">
             <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            <a class="navbar-brand me-1 me-sm-3" href="index.html">
+            <a class="navbar-brand me-1 me-sm-3" href="/">
               <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center"><img src="assets/img/icons/logo.png" alt="phoenix" width="27" />
                   <h5 class="logo-text ms-2 d-none d-sm-block">MGG Tools</h5>
@@ -278,7 +286,7 @@
         <div class="row g-3 mb-4">
             
             <div class="col-md-6 col-lg-3">
-                <a href="stats.html" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+                <a href="/stats" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="d-flex align-items-center mb-3">
                             <span class="nav-link-icon me-2 text-primary shortcut-icon"><span data-feather="figma"></span></span>
@@ -290,7 +298,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-                <a href="mutantlist.html" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+                <a href="/mutantlist" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="d-flex align-items-center mb-3">
                             <span class="nav-link-icon me-2 text-primary shortcut-icon"><span data-feather="server"></span></span>
@@ -302,7 +310,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-                <a href="evo.html" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+                <a href="/evo" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="d-flex align-items-center mb-3">
                             <span class="nav-link-icon me-2 text-primary shortcut-icon"><i class="fas fa-angle-double-up"></i></span>
@@ -314,7 +322,7 @@
             </div>
 
             <div class="col-md-6 col-lg-3">
-              <a href="top-mutants.html" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+              <a href="/top-mutants" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
                 <div class="card-body d-flex flex-column justify-content-between">
                   <div class="d-flex align-items-center mb-3">
                     <span class="nav-link-icon me-2 text-primary shortcut-icon"><i class="fas fa-trophy"></i></span>
@@ -324,9 +332,21 @@
                 </div>
               </a>
             </div>
+
+            <div class="col-md-6 col-lg-3">
+              <a href="/battle" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="nav-link-icon me-2 text-primary shortcut-icon"><i class="fas fa-fist-raised tool-icon"></i></span>
+                    <h5 class="mb-0 text-body">Damage Simulator</h5>
+                  </div>
+                  <p class="mb-0 text-body-tertiary">Calcula el daño exacto que le harias a un mutante.</p>
+                </div>
+              </a>
+            </div>
             
             <div class="col-md-6 col-lg-3">
-                <a href="changelog.html" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
+                <a href="/changelog" class="card shadow-none border h-100 hover-shadow-lg text-decoration-none shortcut-card">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div class="d-flex align-items-center mb-3">
                             <span class="nav-link-icon me-2 text-primary shortcut-icon"><span data-feather="git-merge"></span></span>
