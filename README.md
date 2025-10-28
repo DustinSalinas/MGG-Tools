@@ -1,6 +1,6 @@
 # 🧬 MGG Tools 🛠️
 
-**MGG Tools** es tu centro de recursos no oficial y definitivo para el popular juego de estrategia **Mutants: Genetic Gladiators** de Kobojo.
+**MGG Tools** es tu centro de recursos no oficial y definitivo para el popular juego de estrategia **Mutants: Genetic Gladiators** de Celsius Online.
 
 Calcula, compara y domina la arena con nuestras herramientas especializadas diseñadas para maximizar tu estrategia de juego.
 
