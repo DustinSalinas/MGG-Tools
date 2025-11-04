@@ -31,6 +31,7 @@
     <!--    Stylesheets-->
     <!-- ===============================================-->
     <style>
+      /* ===== STAR SELECTOR STYLES ===== */
       #resultsContainer .star-overlay {
           position: absolute;
           top: 5px;
@@ -124,6 +125,7 @@
           transform: scale(2.2);
       }
 
+      /* Estrellas de temporada cuando están seleccionadas */
       .star-selector-text img[src*="icon_spring"],
       .star-selector-text img[src*="icon_summer"],
       .star-selector-text img[src*="icon_autumn"],
@@ -134,6 +136,7 @@
           transform: scale(1.3);
       }
 
+      /* ===== MUTANT CARD STYLES ===== */
       .mutants-grid-container {
           background-color: transparent;
           padding: 10px;
@@ -200,6 +203,7 @@
         font-weight: bold;
       }
 
+       /* ===== ORB MENU STYLES ===== */
       .slot-item {
           position: relative;
           margin: 0 5px;
@@ -359,7 +363,7 @@
     <!-- ===============================================-->
     <!--    Main Content-->
     <!-- ===============================================-->
-   <main class="main" id="top">
+    <main class="main" id="top">
       <nav class="navbar navbar-vertical navbar-expand-lg" style="display:none;">
         <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
           <!-- scrollbar removed-->
@@ -394,6 +398,14 @@
               </li>
               <li class="nav-item">
                 <!-- label-->
+                <p class="navbar-vertical-label">Info</p>
+                <hr class="navbar-vertical-line" /><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/rebalance" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-cogs"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Rebalance</span></span></div>
+                </a></div>
+              </li>
+              <li class="nav-item">
+                <!-- label-->
                 <p class="navbar-vertical-label">Documentation</p>
                 <hr class="navbar-vertical-line" /><!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="/credits" role="button" data-bs-toggle="" aria-expanded="false">
@@ -420,6 +432,7 @@
               </div>
             </a>
           </div>
+          
           <ul class="navbar-nav navbar-nav-icons flex-row">
             <li class="nav-item">
               <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="sun"></span></label></div>
@@ -535,8 +548,8 @@
                 <label class="form-label" for="mutantName">Mutant Name:</label>
                 <input class="form-control" id="mutantName" type="text">
                 <div id="mutantsGridContainer" class="mutants-grid-container" style="display: none; overflow-x: auto; white-space: nowrap;"></div>  <!-- Agregué display: none; y overflow para scroll horizontal si es necesario -->
-            </div>
-              <div class="col-auto">
+              </div>
+              <div class="mb-3" id="levelInputGroup">
                 <label class="form-label" for="levelInput">Level:</label>
                 <input class="form-control" id="levelInput" type="number" min="1" max="1000000">
               </div>
@@ -565,7 +578,7 @@
               <p class="mb-0 mt-2 mt-sm-0 text-body">Site by SpikerMan666. All rights reserved ©.<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1"></p>
             </div>
             <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v2.3</p>
+              <p class="mb-0 text-body-tertiary text-opacity-85">v2.4</p>
             </div>
           </div>
         </footer>
