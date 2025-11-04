@@ -98,6 +98,14 @@
               </li>
               <li class="nav-item">
                 <!-- label-->
+                <p class="navbar-vertical-label">Info</p>
+                <hr class="navbar-vertical-line" /><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/rebalance" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-cogs"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Rebalance</span></span></div>
+                </a></div>
+              </li>
+              <li class="nav-item">
+                <!-- label-->
                 <p class="navbar-vertical-label">Documentation</p>
                 <hr class="navbar-vertical-line" /><!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="/credits" role="button" data-bs-toggle="" aria-expanded="false">
@@ -234,6 +242,31 @@
         <h2 class="mb-2 lh-sm">Changelog</h2>
         <div class="card shadow-none border my-3">
           <div class="card-header border-bottom bg-body">
+              <h5 class="mb-2"><code class="fw-bold fs-7">v2.4</code></h5>
+              <p class="mb-0">03 Noviembre, 2025</p>
+          </div>
+          <div class="card-body">
+              <h6 class="mb-2">New</h6>
+              <ul class="bullet-inside ps-0">
+                  <li>Se implementaron calculos con orbes, habilidad de fortalecimiento y debilidad a los mutantes de <code>Damage Simulator</code>.</li>
+                  <li>Se añadió un nuevo apartado llamado Info.</li>
+                  <li>Se añadio una nueva sección <code>Rebalance</code> en el cual se mostrara los mutantes <code>Buff, Nerf y Reajustados</code>.</li>
+                </ul>
+              <h6 class="mb-2">Update</h6>
+              <ul class="bullet-inside ps-0">
+                  <li>Mejoras en la sección de <code>Damage Simulator</code> ahora podras agregar orbes y variantes al daño.</code></li>
+                  <li>Mejoras generales en el diseño de la página.</li>
+              </ul>
+              <h6 class="mb-2">Fix</h6>
+              <ul class="bullet-inside ps-0">
+                  <li>Se corrigieron pequeños errores visuales y de alineación en las secciones <code>Stats</code> y <code>Damage Simulator</code>.</li>
+                  <li>Se corrigieron bugs de calculos de stats con variables de mayor daño.</li>
+                  <li>Se limito el fortalecimiento a máximo 2 en la sección <code>Damage Simulator</code>.</li>
+              </ul>
+          </div>
+        </div>
+        <div class="card shadow-none border my-3">
+          <div class="card-header border-bottom bg-body">
               <h5 class="mb-2"><code class="fw-bold fs-7">v2.3</code></h5>
               <p class="mb-0">27 Octubre, 2025</p>
           </div>
@@ -267,7 +300,6 @@
               <li>Se añadieron nuevas páginas dedicadas: <code>mutantlist.html</code>, <code>stats.html</code>, <code>evo.html</code> y <code>top-mutants.html</code>.</li>
               <li>Se incorporaron nuevas hojas de estilo (<code>theme.min.css</code> y <code>mutants.css</code>) para mejorar la personalización del sitio.</li>
               <li>Se agregaron fondos e imágenes actualizadas en la carpeta <code>/assets/img/bg</code> para una experiencia visual más atractiva.</li>
-              <li>Se creó una página de errores personalizada (<code>403.html</code>, <code>404.html</code>, <code>500.html</code>).</li>
             </ul>
             <h6 class="mb-2">Update</h6>
             <ul class="bullet-inside ps-0">
@@ -560,7 +592,7 @@
               <p class="mb-0 mt-2 mt-sm-0 text-body">Site by SpikerMan666. All rights reserved ©.<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1"></p>
             </div>
             <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v2.3</p>
+              <p class="mb-0 text-body-tertiary text-opacity-85">v2.4</p>
             </div>
           </div>
         </footer>
