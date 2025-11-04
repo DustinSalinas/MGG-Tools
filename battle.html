@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
 
+  
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
     <title>MGG Tools</title>
 
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
@@ -19,155 +27,109 @@
     <script src="vendors/simplebar/simplebar.min.js"></script>
     <script src="assets/js/config.js"></script>
 
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
     <style>
-      .battle-container {
-          max-width: 1200px; 
-          margin-left: auto;
-          margin-right: auto;
+      .card {
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+          border-width: 2px !important;
       }
 
-      .small-card {
-          max-width: 800px; 
-          margin-left: auto;
-          margin-right: auto;
-      }
-      
-      .active-gene-btn {
-          background-color: transparent !important;
-          border-color: transparent !important;
-      }
-      .inactive-gene-btn {
-          background-color: transparent !important;
-          border-color: transparent !important;
-          color: var(--phoenix-body-color) !important;
+      .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+          border-color: var(--phoenix-700);
       }
 
-      .mutants-grid-container {
-          max-height: 450px;
-          overflow-y: auto;
-          padding: 10px;
-          border: 1px solid var(--phoenix-border-color);
-          border-top: none;
-          border-radius: 0 0 var(--phoenix-border-radius) var(--phoenix-border-radius);
-          background-color: var(--phoenix-body-bg);
-          position: absolute;
-          z-index: 10;
-          width: 95%;
+      .card-header {
+          border-bottom: none;
       }
 
-      .mutants-grid {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-start;
-          gap: 10px;
-      }
-
-      .mutant-card {
-          display: flex;
+      .mutant-item {
           flex-direction: column;
-          align-items: center;
-          width: 100px;
-          padding: 8px;
-          border-radius: var(--phoenix-border-radius);
-          background-color: var(--phoenix-tertiary-bg);
-          border: 1px solid var(--phoenix-border-color);
-          cursor: pointer;
-          transition: background-color 0.2s ease, border-color 0.2s ease;
+          align-items: flex-start !important;
+          padding: 1rem 1.25rem !important;
       }
 
-      .mutant-card:hover {
-          background-color: var(--phoenix-secondary-bg);
-          border-color: var(--phoenix-primary);
-      }
-
-      .mutant-card-image {
-          width: 70px;
-          height: 70px;
+      .mutant-avatar {
+          width: 48px;
+          height: 48px;
           object-fit: cover;
-          margin-bottom: 5px;
+          border: 2px solid var(--phoenix-500);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       }
 
-      .mutant-card-name {
-          font-size: 0.8em;
-          font-weight: bold;
-          color: var(--phoenix-body-color);
-          text-align: center;
-          width: 100%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis; 
-      }
-
-      .mutant-genes {
-          display: flex;
-          gap: 4px;
-          margin-top: 4px;
-      }
-
-      .gene-icon {
-          width: 16px;
-          height: 16px;
-      }
-
-      #gene1Button, #gene2Button {
-          background-color: transparent !important; 
-          border: none !important; 
-          box-shadow: none !important; 
-          padding: 0; 
-          margin: 0 auto; 
-          height: 60px; 
-          width: 60px; 
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-      }
-
-      .attack-input-group {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-      }
-      
-      .attack-col {
-          display: flex;
+      .mutant-list-item-single {
           flex-direction: column;
-          align-items: center;
-          width: 150px;
+          align-items: flex-start !important;
+          padding: 1rem 1.25rem !important;
+          transition: background-color 0.2s ease-in-out; 
+          border-color: var(--phoenix-400, #ced4da) !important; 
       }
 
-      .gene-button-img {
-          height: 50px; 
-          width: 50px;
-          transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out;
+      .changes-container {
+          width: 100%;
+          margin-top: 10px;
+          background-color: var(--phoenix-300);
+          border-radius: var(--phoenix-border-radius);
+          padding: 0.75rem !important;
       }
 
-      .grayscale-filter {
-          filter: grayscale(100%);
+      .change-item {
+          font-size: 0.9em;
+      }
+
+      .change-item .old-value {
+          color: var(--phoenix-700);
+          text-decoration: line-through;
           opacity: 0.7;
       }
 
-      #gene1Button.active-gene-btn .gene-button-img,
-      #gene2Button.active-gene-btn .gene-button-img {
-          transform: scale(1.1);
+      .change-item .new-value {
+          font-weight: 700 !important;
+          font-size: 1.1em;
       }
 
-      .mutant-image-container {
-          display: flex;
-          justify-content: center; 
-          align-items: center;
-          margin-top: 15px;
-          margin-bottom: 25px; 
-          min-height: 100px;
+      .rebalance-month-section {
+          position: relative;
       }
 
-      .selected-mutant-image {
-          width: 150px; 
-          height: 150px;
-          object-fit: contain;
-          border-radius: 50%;
-          border: 3px solid var(--phoenix-primary); 
-          box-shadow: 0 0 15px rgba(92, 107, 192, 0.5);
+      .bg-success-soft {
+          background-color: var(--phoenix-success-soft, rgba(3, 169, 244, 0.1));
+      }
+      .bg-danger-soft {
+          background-color: var(--phoenix-danger-soft, rgba(239, 68, 68, 0.1));
+      }
+      .bg-info-soft {
+          background-color: var(--phoenix-info-soft, rgba(0, 188, 212, 0.1));
+      }
+
+      @media (max-width: 767px) {
+        .mutant-avatar {
+            width: 40px; 
+            height: 40px;
+        }
+
+        .mutant-list-item-single .d-flex.align-items-center > span.fw-bold {
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            max-width: 150px; 
+            font-size: 1.1rem;
+        }
+        
+        .change-item {
+            font-size: 0.8em;
+        }
+        
+        .change-item .new-value {
+            font-size: 1em;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+        }
       }
     </style> 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -200,7 +162,10 @@
   </head>
 
   <body>
-   <main class="main" id="top">
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
       <nav class="navbar navbar-vertical navbar-expand-lg" style="display:none;">
         <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
           <!-- scrollbar removed-->
@@ -235,6 +200,14 @@
               </li>
               <li class="nav-item">
                 <!-- label-->
+                <p class="navbar-vertical-label">Info</p>
+                <hr class="navbar-vertical-line" /><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="/rebalance" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-cogs"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Rebalance</span></span></div>
+                </a></div>
+              </li>
+              <li class="nav-item">
+                <!-- label-->
                 <p class="navbar-vertical-label">Documentation</p>
                 <hr class="navbar-vertical-line" /><!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="/credits" role="button" data-bs-toggle="" aria-expanded="false">
@@ -261,6 +234,7 @@
               </div>
             </a>
           </div>
+          
           <ul class="navbar-nav navbar-nav-icons flex-row">
             <li class="nav-item">
               <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="sun"></span></label></div>
@@ -368,96 +342,26 @@
         }
       </script>
       <div class="content">
-
-        <div class="row battle-container">
-            <div class="col-lg-6">
-                <div class="card shadow-none border my-3">
-                  <div class="card-header border-bottom bg-body">
-                      <h5 class="mb-2"><code class="fw-bold fs-7">Tu Mutante</code></h5>
-                  </div>
-                  <div class="card-body">
-                      <div class="mb-3">
-                        <label class="form-label" for="mutantName">Mutante Name: </label>
-                        <input class="form-control" id="mutantName" type="text" placeholder="Escribe para buscar..." autocomplete="off" />
-                        
-                        <div id="mutantsGridContainerAttacker" class="mutants-grid-container" style="display: none;">
-                        </div>
-                      </div>
-                      
-                      <div id="mutantImageAttacker" class="mutant-image-container" style="display: none;"></div>
-
-                      <div id="attackerAttackBlock" style="display: none;">
-                          <div class="attack-input-group mb-3">
-                              <div class="attack-col">
-                                  <button class="btn w-100 mb-1 active-gene-btn" data-gene-index="0" id="gene1Button"></button>
-                                  <input class="form-control attack-input" id="attackGene1" type="text" placeholder="Ataque Gen 1"/>
-                              </div>
-                              <div class="attack-col">
-                                  <button class="btn w-100 mb-1 inactive-gene-btn" data-gene-index="1" id="gene2Button"></button>
-                                  <input class="form-control attack-input" id="attackGene2" type="text" placeholder="Ataque Gen 2"/>
-                              </div>
-                          </div>
-                          <input type="hidden" id="activeGeneIndex" value="0">
-                      </div>
-                      </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="card shadow-none border my-3">
-                  <div class="card-header border-bottom bg-body">
-                      <h5 class="mb-2"><code class="fw-bold fs-7">Mutante Rival</code></h5>
-                  </div>
-                  <div class="card-body">
-                      <div class="mb-3">
-                        <label class="form-label" for="mutantNameRival">Mutante Name: </label>
-                        <input class="form-control" id="mutantNameRival" type="text" placeholder="Escribe para buscar..." autocomplete="off" />
-                        
-                        <div id="mutantsGridContainerDefender" class="mutants-grid-container" style="display: none;">
-                            </div>
-                      </div>
-                      
-                      <div id="mutantImageDefender" class="mutant-image-container" style="display: none;"></div>
-
-                      <div class="mb-3" id="defenderLifeBlock" style="display: none;">
-                        <label class="form-label" for="life">Vida: </label>
-                        <input class="form-control" id="life" type="text" placeholder="Vida del mutante Rival"/>
-                      </div>
-                  </div>
-                </div>
-            </div>
+        <div id="rebalance-section" class="mb-5"> 
         </div>
 
-        <div class="d-flex justify-content-center my-3">
-            <div class="d-grid small-card">
-              <button class="btn btn-primary w-100" type="button">Calcular</button> 
-            </div>
-        </div>
-
-        <div class="small-card">
-            <div class="card shadow-none border my-3">
-              <div class="card-header border-bottom bg-body">
-                  <h5 class="mb-2"><code class="fw-bold fs-7">Resultado de batalla</code></h5>
-              </div>
-              <div class="card-body" id="battle-results-body">
-                  <p>Esperando cálculo...</p>
-              </div>
-            </div>
-        </div>
-        
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 mt-2 mt-sm-0 text-body">Site by SpikerMan666. All rights reserved ©.<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1"></p>
             </div>
             <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v2.3</p>
+              <p class="mb-0 text-body-tertiary text-opacity-85">v2.4</p>
             </div>
           </div>
         </footer>
       </div>
     </main>
     
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
     <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1" aria-labelledby="settings-offcanvas">
       <div class="offcanvas-header align-items-start border-bottom flex-column border-translucent">
         <div class="pt-1 w-100 mb-6 d-flex justify-content-between align-items-start">
@@ -521,9 +425,11 @@
           </div>
         </div><a class="bun btn-primary d-grid mb-3 text-white mt-5 btn btn-primary" href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank">Purchase template</a>
       </div>
-    </div>    
+    
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
     <script src="vendors/popper/popper.min.js"></script>
     <script src="vendors/bootstrap/bootstrap.min.js"></script>
     <script src="vendors/anchorjs/anchor.min.js"></script>
@@ -539,7 +445,9 @@
     <script src="assets/js/phoenix.js"></script>
     <script src="vendors/echarts/echarts.min.js"></script>
     <script src="assets/js/dashboards/ecommerce-dashboard.js"></script>
-    <script src="assets/js/simulator.js"></script>
+    <script src="assets/js/rebalance.js"></script>
   </body>
+
+
 
 </html>
