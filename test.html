@@ -20,6 +20,59 @@
     <meta name="theme-color" content="#ffffff">
     <script src="vendors/simplebar/simplebar.min.js"></script>
     <script src="assets/js/config.js"></script>
+    <style>
+      .stat-card {
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+      }
+      .stat-card img {
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+      }
+      #resultsContainer .text-success { color: #28a745 !important; }
+      #resultsContainer .text-danger { color: #dc3545 !important; }
+      #resultsContainer .text-primary { color: #007bff !important; }
+      .mutants-grid-container {
+          background-color: transparent;
+          padding: 10px;
+          border-radius: 8px;
+          max-height: 450px;
+          overflow-y: auto;
+      }
+      .mutants-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          gap: 10px;
+          justify-items: center;
+      }
+      .mutant-card {
+          width: 140px;
+          padding: 10px;
+          border: 1px solid rgba(255,255,255,0.1);
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s;
+          background-color: rgba(255,255,255,0.05);
+          border-radius: 8px;
+      }
+      .mutant-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+          background-color: rgba(255,255,255,0.1);
+      }
+      .mutant-card-image { width: 80px; margin-bottom: 5px; }
+      .mutant-card-name { font-size: 0.9em; font-weight: bold; }
+      .mutant-genes { display: flex; justify-content: center; gap: 3px; }
+      .gene-icon {
+          width: 15px; height: 15px; border-radius: 50%;
+          background-color: rgba(255,255,255,0.1);
+          color: white; font-weight: bold; font-size: 0.7em;
+          line-height: 15px;
+      }
+      .mutant-card .gene-img { width: 18px; height: 18px; }
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -80,7 +133,7 @@
                     <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-fist-raised tool-icon"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Damage Simulator</span></span></div>
                   </a></div><!-- parent pages-->
                 <div class="nav-item-wrapper"><a class="nav-link label-1" href="test.html" role="button" data-bs-toggle="" aria-expanded="false">
-                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fa-solid fa-question"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Coming Soon</span></span></div>
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather=""><i class="fas fa-flask"></i></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Mutant Builder</span></span></div>
                   </a></div><!-- parent pages-->
               </li>
               <li class="nav-item">
@@ -227,21 +280,214 @@
         }
       </script>
       <div class="content">
-        <div class="row flex-center min-vh-100 py-6">
-            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div class="text-center">
-                    <span class="fa-solid fa-traffic-cone fs-1 text-warning mb-3"></span> <h1 class="text-primary fw-bolder mb-2">En Construcción</h1>
-                    <p class="text-body-tertiary">Esta herramienta está en construcción. ¡Vuelva pronto!</p>
+        <div class="container py-6">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                  <h3 class="mb-0">Mutants Builder</h3>
                 </div>
+                <div class="card-body p-4">
+
+                  <!-- Input: Nombre del Mutante -->
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">Mutant Name</label>
+                    <input type="text" id="mutantSearch" class="form-control form-control-lg" placeholder="Escribe o selecciona un mutante..." autocomplete="off">
+                    <div id="mutantsGridContainer" class="mutants-grid-container mt-2" style="display:none;">
+                      <div class="mutants-grid" id="mutantsGrid"></div>
+                    </div>
+                  </div>
+
+                  <!-- Nivel -->
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">Level</label>
+                    <input type="number" id="levelInput" class="form-control" value="25" min="1" max="100000">
+                  </div>
+
+                  <!-- Contenedor de Checkboxes e Inputs -->
+                  <div id="statsContainer" style="display: none;">
+                    <div class="mb-3">
+                      <label class="form-label">Star Level</label>
+                      <select id="starSelect" class="form-select"></select>
+                    </div>
+                    <hr>
+                    <h5 class="text-primary mb-3">Custom Stats (check to override)</h5>
+                    <div class="text-center my-4">
+                      <center><img id="mutantImage" src="" alt="Mutant" class="img-fluid rounded shadow-sm" style="max-height: 180px; display: none;"></center>
+                    </div>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkHP">
+                          <label class="form-check-label" for="chkHP">HP</label>
+                        </div>
+                        <input type="number" id="inputHP" class="form-control mt-1" placeholder="Base HP" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkSpeed">
+                          <label class="form-check-label" for="chkSpeed">Speed</label>
+                        </div>
+                        <input type="number" id="inputSpeed" class="form-control mt-1" placeholder="Base Speed" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAtk1">
+                          <label class="form-check-label" for="chkAtk1">Atk1</label>
+                        </div>
+                        <input type="number" id="inputAtk1" class="form-control mt-1" placeholder="Base Atk1" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAtk1p">
+                          <label class="form-check-label" for="chkAtk1p">Atk1+</label>
+                        </div>
+                        <input type="number" id="inputAtk1p" class="form-control mt-1" placeholder="Base Atk1+" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAtk2">
+                          <label class="form-check-label" for="chkAtk2">Atk2</label>
+                        </div>
+                        <input type="number" id="inputAtk2" class="form-control mt-1" placeholder="Base Atk2" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAtk2p">
+                          <label class="form-check-label" for="chkAtk2p">Atk2+</label>
+                        </div>
+                        <input type="number" id="inputAtk2p" class="form-control mt-1" placeholder="Base Atk2+" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAbility">
+                          <label class="form-check-label" for="chkAbility">Ability</label>
+                        </div>
+                        <input type="number" id="inputAbility" class="form-control mt-1" placeholder="Base Ability" disabled>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="chkAbilityp">
+                          <label class="form-check-label" for="chkAbilityp">Ability+</label>
+                        </div>
+                        <input type="number" id="inputAbilityp" class="form-control mt-1" placeholder="Base Ability+" disabled>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Resultados -->
+                  <div id="resultsContainer" class="mt-4 p-4 rounded shadow-sm" style="display: none;">
+                    <h5 class="text-success mb-4 text-center">Stats at Level <span id="resultLevel"></span></h5>
+
+                    <div class="row g-3 text-center">
+
+                      <!-- HP -->
+                      <div class="col-6 col-md-3" id="resultHP-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/common_files/icon_hp.png" width="36" height="36" class="mb-1">
+                          <div id="resultHP" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Speed -->
+                      <div class="col-6 col-md-3" id="resultSpeed-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/common_files/icon_speed.png" width="36" height="36" class="mb-1">
+                          <div id="resultSpeed" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Atk1 -->
+                      <div class="col-6 col-md-3" id="resultAtk1-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="gene1-img" class="mb-1"></div>
+                          <div id="resultAtk1" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Atk1+ -->
+                      <div class="col-6 col-md-3" id="resultAtk1p-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="gene1p-img" class="mb-1"></div>
+                          <div id="resultAtk1p" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Atk2 -->
+                      <div class="col-6 col-md-3" id="resultAtk2-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="gene2-img" class="mb-1"></div>
+                          <div id="resultAtk2" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Atk2+ -->
+                      <div class="col-6 col-md-3" id="resultAtk2p-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="gene2p-img" class="mb-1"></div>
+                          <div id="resultAtk2p" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Ability (Atk1) -->
+                      <div class="col-6 col-md-3" id="resultAbility1-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="ability1-img" class="mb-1"></div>
+                          <div><small>Ability (Atk1)</small></div>
+                          <div id="resultAbility1" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Ability (Atk2) -->
+                      <div class="col-6 col-md-3" id="resultAbility2-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="ability2-img" class="mb-1"></div>
+                          <div><small>Ability (Atk2)</small></div>
+                          <div id="resultAbility2" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Ability+ (Atk1+) -->
+                      <div class="col-6 col-md-3" id="resultAbilityp1-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="abilityp1-img" class="mb-1"></div>
+                          <div><small>Ability+ (Atk1+)</small></div>
+                          <div id="resultAbilityp1" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                      <!-- Ability+ (Atk2+) -->
+                      <div class="col-6 col-md-3" id="resultAbilityp2-wrapper">
+                        <div class="stat-card p-3 rounded shadow-sm border">
+                          <div id="abilityp2-img" class="mb-1"></div>
+                          <div><small>Ability+ (Atk2+)</small></div>
+                          <div id="resultAbilityp2" class="fs-5 fw-bold"></div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+
         <footer class="footer position-absolute">
           <div class="row g-0 justify-content-between align-items-center h-100">
             <div class="col-12 col-sm-auto text-center">
               <p class="mb-0 mt-2 mt-sm-0 text-body">Site by SpikerMan666. All rights reserved ©.<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1"></p>
             </div>
             <div class="col-12 col-sm-auto text-center">
-              <p class="mb-0 text-body-tertiary text-opacity-85">v2.5</p>
+              <p class="mb-0 text-body-tertiary text-opacity-85">v2.6</p>
             </div>
           </div>
         </footer>
@@ -312,7 +558,7 @@
         </div><a class="bun btn-primary d-grid mb-3 text-white mt-5 btn btn-primary" href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank">Purchase template</a>
       </div>
     
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="vendors/popper/popper.min.js"></script>
     <script src="vendors/bootstrap/bootstrap.min.js"></script>
     <script src="vendors/anchorjs/anchor.min.js"></script>
@@ -328,6 +574,7 @@
     <script src="assets/js/phoenix.js"></script>
     <script src="vendors/echarts/echarts.min.js"></script>
     <script src="assets/js/dashboards/ecommerce-dashboard.js"></script>
+    <script src="assets/js/test.js"></script>
   </body>
 
 
