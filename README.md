@@ -13,6 +13,7 @@ MGG Tools proporciona un conjunto de herramientas esenciales para la comunidad d
 * **Evo Calculator**: Determina el costo preciso de Oro y Créditos de Evolución necesarios para subir de nivel a tus mutantes.
 * **Top Mutants**: Consulta un ranking de los 10 mutantes más fuertes por cada gen, basados en sus estadísticas base.
 * **Damage Simulator**: Calcula el daño exacto que le harias a un mutante.
+* **Mutant Builder**: Constructor completo de mutantes: estadísticas, estrellas, genes, habilidades y edición manual.
 * **Rebalance**: Revisa los cambios recientes en las estadísticas o habilidades de los mutantes.
 * **Últimas Novedades**: Mantente al día con la última versión (v2.3), incluyendo los mutantes y funciones más recientes.
 
