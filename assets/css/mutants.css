@@ -1430,6 +1430,12 @@ button:hover, .btn-primary:hover {
     gap: 0.75rem;
   }
 
+  #resultsContainer img.stat-icon {
+    height: 28px !important;
+    width: 28px !important;
+    object-fit: contain;
+  }
+
   #resultsContainer .stat-icon {
     height: 28px;
     margin-bottom: 4px;
