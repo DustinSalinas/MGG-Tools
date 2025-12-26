@@ -30,7 +30,7 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-     <style>
+    <style>
       #gene-selector .btn {
         background: transparent;
         border: none;
@@ -39,8 +39,22 @@
         border-radius: 0; 
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
+
       #gene-selector .btn:hover {
         transform: scale(1.1);
+      }
+
+      #gene-selector .btn[data-category="damage"] img,
+      #gene-selector .btn[data-category="hp"] img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+      }
+
+      #gene-selector .btn[data-category="damage"] img,
+      #gene-selector .btn[data-category="hp"] img {
+        width: 50px;
+        height: 50px;
       }
       
       #gene-selector .btn img {
@@ -396,7 +410,7 @@
         }
       </script>
       <div class="content">
-        <h2 class="mb-2 lh-sm">Top 10 Mutants by Gene</h2>
+        <h2 class="mb-2 lh-sm">Top 10 Mutants</h2>
         <div class="card shadow-none border my-3">
           <div class="text-center mb-4" id="gene-selector">
             <button class="btn" data-gene="A" title="Cyber">
@@ -416,6 +430,12 @@
             </button>
             <button class="btn" data-gene="F" title="Mythic">
               <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/fight_ui/gene_f.png" alt="Mythic Gene">
+            </button>
+            <button class="btn" data-category="damage" title="Top Daño">
+              <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/fight_ui/icon_atk_1.png" alt="Damage Top">
+            </button>
+            <button class="btn" data-category="hp" title="Top Vida">
+              <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/common_files/icon_hp.png" alt="Life">
             </button>
           </div>
 
