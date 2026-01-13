@@ -15,7 +15,7 @@ MGG Tools proporciona un conjunto de herramientas esenciales para la comunidad d
 * **Damage Simulator**: Calcula el daño exacto que le harias a un mutante.
 * **Mutant Builder**: Constructor completo de mutantes: estadísticas, estrellas, genes, habilidades y edición manual.
 * **Rebalance**: Revisa los cambios recientes en las estadísticas o habilidades de los mutantes.
-* **Últimas Novedades**: Mantente al día con la última versión (v2.3), incluyendo los mutantes y funciones más recientes.
+* **Últimas Novedades**: Mantente al día con la última versión (v2.8), incluyendo los mutantes y funciones más recientes.
 
 ## 💻 Desarrollo
 
