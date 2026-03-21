@@ -1,0 +1,716 @@
+/* ============================================================
+   MGG TOOLS — Stats Simulator Stylesheet
+   css/stats.css
+   ============================================================ */
+
+/* ── Main layout ─────────────────────────────────────── */
+.ss-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Left column ─────────────────────────────────────── */
+.ss-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: calc(var(--topbar-height) + 24px);
+}
+
+/* ── Config card ─────────────────────────────────────── */
+.ss-config-card,
+.ss-star-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.ss-config-header {
+  padding: 13px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ss-config-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Fields ──────────────────────────────────────────── */
+.ss-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+}
+
+.ss-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Search ──────────────────────────────────────────── */
+.ss-search-wrap { position: relative; }
+
+.ss-search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.ss-input {
+  width: 100%;
+  padding: 10px 12px 10px 34px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ss-nopad { padding-left: 12px; }
+
+.ss-input::placeholder { color: var(--text-muted); }
+.ss-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ── Mutants grid dropdown ───────────────────────────── */
+.ss-grid-dropdown {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 10px;
+  margin-top: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  z-index: 200;
+}
+
+.mutants-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mutant-card {
+  padding: 8px 4px 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition);
+  overflow: hidden;
+  box-sizing: border-box;
+  /* 3 per row: (100% - 2 gaps of 6px) / 3 */
+  width: calc(33.333% - 4px);
+  flex-shrink: 0;
+}
+
+.mutant-card:hover {
+  border-color: var(--accent-primary);
+  background: rgba(79,163,224,0.08);
+  transform: translateY(-2px);
+}
+
+.mutant-card-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.mutant-card-name {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.mutant-genes {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.gene-icon {
+  width: 14px; height: 14px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* ── Star selector ───────────────────────────────────── */
+.star-dropdown { position: relative; }
+
+.star-selector-container {
+  position: relative;
+  width: 46px; height: 46px;
+  cursor: pointer;
+}
+
+.star-button-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  object-fit: contain;
+}
+
+.star-selector-text {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.star-selector-text img {
+  width: 65% !important;
+  height: 65% !important;
+  object-fit: contain !important;
+}
+
+.star-selector-text img[src*="icon_spring"],
+.star-selector-text img[src*="icon_summer"],
+.star-selector-text img[src*="icon_autumn"],
+.star-selector-text img[src*="icon_winter"],
+.star-selector-text img[src*="icon_easter"] {
+  width: 350% !important;
+  height: 350% !important;
+  transform: scale(1.3);
+}
+
+.star-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 150px;
+  padding: 4px 0;
+  z-index: 300;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+
+.star-options.show { display: block; }
+
+.star-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  color: var(--text-secondary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.star-option:hover {
+  background: rgba(79,163,224,0.1);
+  color: var(--text-primary);
+}
+
+.star-option .star-icon {
+  width: 20px; height: 20px;
+  object-fit: contain;
+}
+
+.star-option img[src*="icon_spring"],
+.star-option img[src*="icon_summer"],
+.star-option img[src*="icon_autumn"],
+.star-option img[src*="icon_winter"],
+.star-option img[src*="icon_easter"] {
+  width: 22px !important;
+  height: 22px !important;
+  transform: scale(2.2);
+}
+
+/* ── Right column ────────────────────────────────────── */
+.ss-right-col {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Placeholder ─────────────────────────────────────── */
+.ss-placeholder {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  width: 100%;
+}
+
+.ss-placeholder svg {
+  width: 48px; height: 48px;
+  margin: 0 auto 16px;
+  opacity: 0.2;
+  display: block;
+}
+
+.ss-placeholder p { font-size: 0.9rem; }
+
+/* ── Result card ─────────────────────────────────────── */
+.ss-result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: visible;
+  width: 100%;
+  position: relative;
+}
+
+.ss-result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-gold));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* starLevelContainer moved into card's ssStarSlot */
+
+/* ── Header: centered image + info ──────────────────── */
+.ss-result-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 30px 18px 14px;
+  text-align: center;
+}
+
+/* Image wrapper — holds the mutant img + star overlay */
+.ss-result-img-wrap {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+}
+
+.ss-result-img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  display: block;
+}
+
+/* Star slot: top-center overlay on the image, like in-game */
+.ss-star-slot {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* starLevelContainer when inside the star slot */
+#ssStarSlot #starLevelContainer {
+  display: block !important;
+}
+
+.ss-star-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ss-result-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ss-result-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.ss-result-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ss-result-level {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: rgba(79,163,224,0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(79,163,224,0.25);
+}
+
+.ss-result-type {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+}
+
+.ss-result-genes {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.ss-result-genes img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* gene class used in stat boxes */
+.ss-gene-img {
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Orb slots ───────────────────────────────────────── */
+.slots-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex-wrap: wrap;
+  padding: 8px 18px 14px !important;
+}
+
+.slot-item { position: relative; }
+
+.orb-slot-bg {
+  position: relative;
+  width: 66px; height: 66px;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.orb-slot-bg:hover { transform: scale(1.08); }
+
+.slot-bg { width: 100%; height: 100%; object-fit: contain; }
+
+.slot-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 135%;           /* ← prueba 210–240% */
+  height: 135%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* ── Divider ─────────────────────────────────────────── */
+.ss-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0 14px;
+}
+
+/* ── Stats grids ─────────────────────────────────────── */
+.ss-stats-grid {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+}
+
+.ss-stats-3 { grid-template-columns: repeat(3, 1fr); }
+.ss-stats-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* ── Stat item (compact) ─────────────────────────────── */
+.ss-stat-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  transition: border-color var(--transition);
+  min-height: 0;
+}
+
+.ss-stat-item:hover { border-color: var(--border-accent); }
+
+.ss-stat-icon { display: block; object-fit: contain; flex-shrink: 0; }
+
+/* gene imgs inside stat items — no black circle */
+.ss-stat-item img[src*="gene_"] {
+  width: 28px !important; height: 28px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.ss-stat-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.ss-stat-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+/* color variants */
+.ss-stat-hp   .ss-stat-val { color: #e05050; }
+.ss-stat-spd  .ss-stat-val { color: var(--accent-gold); }
+.ss-stat-gold .ss-stat-val { color: var(--accent-gold); }
+
+/* ── Orb dropdown menus ──────────────────────────────── */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  padding: 5px;
+  z-index: 1000;
+  display: none;
+  width: max-content;
+  min-width: 160px;
+  max-width: 210px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.dropdown-menu.visible { display: block; }
+.main-menu       { display: block; }
+.main-menu.hidden{ display: none; }
+.submenu         { display: block; }
+.submenu.hidden  { display: none; }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  gap: 8px;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.875rem;
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+
+.menu-item:hover { background: rgba(79,163,224,0.1); color: var(--text-primary); }
+
+.menu-icon { width: 30px; height: 30px; object-fit: contain; flex-shrink: 0; }
+.menu-text { flex: 1; }
+
+.back-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  color: var(--accent-primary);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 4px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+
+.back-button:hover { background: rgba(79,163,224,0.08); }
+
+.remove-orb-item {
+  color: var(--accent-danger) !important;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 4px;
+}
+.remove-orb-item:hover { background: rgba(224,80,80,0.08) !important; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ss-layout { grid-template-columns: 1fr; }
+  .ss-left-col { position: static; }
+  .ss-right-col { justify-content: stretch; }
+  #resultsContainer { max-width: 100% !important; }
+}
+
+@media (max-width: 480px) {
+  .mutants-grid { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
+  .orb-slot-bg  { width: 46px; height: 46px; }
+  .ss-stats-3   { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── Multi-attack icon ───────────────────────────────── */
+/* ss-gene-wrap now defined with .ss-atk-plus above */
+
+.ss-multi-atk {
+  width: 26px !important;
+  height: 26px !important;
+  object-fit: contain;
+  opacity: 0.9;
+  margin-left: -18px;
+  margin-top: -4px;
+}
+
+/* ── ss-gene-anchor: wraps gene + atk_plus together ──
+   Tamaño fijo 28×28 = tamaño del hexágono gen.
+   El plus se posiciona relativo a este contenedor. */
+.ss-gene-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+/* Gen encima del plus */
+.ss-gene-anchor .ss-gene-img {
+  position: relative;
+  z-index: 1;
+}
+
+/* ATK+ icon: se superpone al gen desde la esquina superior derecha.
+   Ajusta top y left para mover la posición:
+   top  → negativo sube, positivo baja
+   left → % más alto mueve a la derecha */
+.ss-atk-plus {
+  width: 27px !important;
+  height: auto !important;
+  object-fit: contain;
+  opacity: 1;
+  position: absolute;
+  top: -1px;       /* ← sube/baja: negativo=arriba */
+  left: 63%;       /* ← izq/der: % mayor=más derecha */
+  transform: translateX(-50%);
+  z-index: 0;      /* detrás del gen */
+}
+
+/* ss-gene-wrap: contiene anchor + multi-icon */
+.ss-gene-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex-shrink: 0;
+  gap: 0;
+}
+
+/* ── Ability icon + plus overlay (statscal) ─────────── */
+ 
+.ss-abil-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;           /* ← igual al tamaño del ícono habilidad */
+  height: 40px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+ 
+.ss-abil-img {
+  width: 28px;           /* ← tamaño del ícono de habilidad */
+  height: 28px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+ 
+.ss-abil-plus {
+  width: 38px;           /* ← tamaño del plus de habilidad */
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  top: 5px;             /* ← sube(negativo)/baja(positivo) */
+  left: 70%;             /* ← izquierda/derecha */
+  transform: translateX(-60%);
+  z-index: 1;
+  pointer-events: none;
+}
+ 
