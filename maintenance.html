@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MGG Tools — Mantenimiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Exo+2:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/maintenance.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+</head>
+<body>
+  <div class="sp-topbar">
+    <div class="sp-lang-toggle">
+      <button class="sp-lang-btn active" data-lang="es">🇪🇸 ES</button>
+      <button class="sp-lang-btn" data-lang="en">🇬🇧 EN</button>
+    </div>
+    <button class="sp-theme-btn" id="spThemeBtn">☀️</button>
+  </div>
+
+  <div class="sp-wrap">
+    <div class="sp-content">
+      <a class="sp-brand" href="/">
+        <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+          <path d="M16 3L28 9V23L16 29L4 23V9L16 3Z" stroke="#4fa3e0" stroke-width="1.5" fill="rgba(79,163,224,0.08)"/>
+          <path d="M10 14l4 4 8-6" stroke="#f0a030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="16" cy="16" r="3" fill="#4fa3e0" opacity="0.5"/>
+        </svg>
+        MGG Tools
+      </a>
+
+      <div class="sp-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f0a030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="52" height="52">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>
+
+      <h1 class="sp-heading" id="sp-heading">Estamos trabajando en ello</h1>
+      <p class="sp-desc" id="sp-desc">Esta página está temporalmente fuera de servicio. Vuelve pronto.</p>
+
+      <div class="sp-timer-wrap">
+        <span class="sp-timer-label" id="sp-eta">Tiempo estimado de vuelta:</span>
+        <span class="sp-timer" id="maintTimer">02:00:00</span>
+      </div>
+
+      <div class="sp-dots">
+        <div class="sp-dot"></div>
+        <div class="sp-dot"></div>
+        <div class="sp-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/maintenance.js"></script>
+  <script>
+    /*
+      Cambia la fecha y hora al momento exacto en que termina el mantenimiento.
+      Formato: 'AAAA-MM-DDTHH:MM:SS'
+      Ejemplo: '2026-03-21T15:00:00' = 21 de Marzo a las 3:00 PM
+    */
+    startCountdown('2026-03-21T09:00:00');
+  </script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MGG Tools — Mutant Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/mutant-builder.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <svg class="brand-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M16 3L28 9V23L16 29L4 23V9L16 3Z" stroke="#4fa3e0" stroke-width="1.5" fill="rgba(79,163,224,0.08)"/>
+        <path d="M10 14l4 4 8-6" stroke="#f0a030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="16" r="3" fill="#4fa3e0" opacity="0.5"/>
+      </svg>
+      <span class="brand-name">MGG Tools</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="/">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="nav-label" data-i18n="home">Home</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionApps">APPS</div>
+      <a class="nav-item" href="mutants-list">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg>
+        <span class="nav-label" data-i18n="mutantsList">Mutants List</span>
+      </a>
+      <a class="nav-item" href="stats">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-label" data-i18n="statsSimulator">Stats Simulator</span>
+      </a>
+      <a class="nav-item" href="evo-calculator">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span class="nav-label" data-i18n="evoCalculator">Evo Calculator</span>
+      </a>
+      <a class="nav-item" href="top-mutants">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span class="nav-label" data-i18n="topMutants">Top Mutants</span>
+      </a>
+      <a class="nav-item" href="damage-simulator">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3l-7 3.5L5 7l-.5.5 4 3L7 13.5l-.5.5 3 1.5 1.5 3 .5-.5-1-2.5 3-1.5 3 4.5.5-.5L15 14l3.5-7A3 3 0 0 0 18 3z"/></svg>
+        <span class="nav-label" data-i18n="damageSimulator">Damage Simulator</span>
+      </a>
+      <a class="nav-item active" href="mutant-builder">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span class="nav-label" data-i18n="mutantBuilder">Mutant Builder</span>
+      </a>
+      <a class="nav-item" href="compare">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        <span class="nav-label" data-i18n="compareMutants">Compare</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionInfo">INFO</div>
+      <a class="nav-item" href="rebalance">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <span class="nav-label" data-i18n="rebalance">Rebalance</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionDocs">DOCUMENTATION</div>
+      <a class="nav-item" href="credits">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="nav-label" data-i18n="credits">Credits</span>
+      </a>
+      <a class="nav-item" href="changelog">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+        <span class="nav-label" data-i18n="changelog">Changelog</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="collapse-btn" id="collapseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+        <span id="collapseLabel" data-i18n="collapseMenu">Collaps</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ════════════════════════════════════════════ -->
+  <div class="main-content" id="mainContent">
+    <header class="topbar">
+      <div class="topbar-controls">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="es"><span class="flag">🇪🇸</span> ES</button>
+          <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> EN</button>
+        </div>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <h2 class="section-heading" data-i18n="mutantBuilder">Mutant Builder</h2>
+
+      <div class="builder-layout">
+
+        <!-- ── LEFT: Config panel ── -->
+        <div class="builder-panel">
+          <div class="builder-panel-header" data-i18n="mbConfigTitle">CONFIGURACIÓN</div>
+          <div class="builder-panel-body">
+
+            <!-- Search -->
+            <div>
+              <div class="b-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span data-i18n="mbSearchLabel">Mutante</span>
+              </div>
+              <div class="b-search-wrap">
+                <svg class="b-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="mutantSearch" class="b-input"
+                  data-i18n="mbSearchPlaceholder" placeholder="Escribe o selecciona un mutante..." autocomplete="off">
+              </div>
+              <div id="mutantsGridContainer" class="mutants-grid-container" style="display:none;">
+                <div class="mutants-grid" id="mutantsGrid"></div>
+              </div>
+            </div>
+
+            <!-- Level + Stars -->
+            <div class="b-row-2">
+              <div>
+                <div class="b-label">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                  <span data-i18n="mbLevelLabel">Nivel</span>
+                </div>
+                <input type="number" id="levelInput" class="b-number" value="25" min="1" max="100000">
+              </div>
+              <div id="starSection" style="display:none;">
+                <div class="b-label">⭐ <span data-i18n="mbStarLabel">Estrellas</span></div>
+                <select id="starSelect" class="b-select"></select>
+              </div>
+            </div>
+
+            <!-- Custom stats divider -->
+            <div id="customSection" style="display:none;">
+              <div class="b-divider" data-i18n="mbCustomTitle">Stats personalizados</div>
+              <div class="b-stats-grid" style="margin-top:12px;">
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkHP">
+                    <span class="b-stat-check-label">HP</span>
+                  </label>
+                  <input type="number" id="inputHP" class="b-stat-input" placeholder="Base HP" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkSpeed">
+                    <span class="b-stat-check-label">Speed</span>
+                  </label>
+                  <input type="text" id="inputSpeed" class="b-stat-input" placeholder="Base Speed" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAtk1">
+                    <span class="b-stat-check-label">Atk 1</span>
+                  </label>
+                  <input type="number" id="inputAtk1" class="b-stat-input" placeholder="Base Atk1" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAtk1p">
+                    <span class="b-stat-check-label">Atk 1+</span>
+                  </label>
+                  <input type="number" id="inputAtk1p" class="b-stat-input" placeholder="Base Atk1+" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAtk2">
+                    <span class="b-stat-check-label">Atk 2</span>
+                  </label>
+                  <input type="number" id="inputAtk2" class="b-stat-input" placeholder="Base Atk2" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAtk2p">
+                    <span class="b-stat-check-label">Atk 2+</span>
+                  </label>
+                  <input type="number" id="inputAtk2p" class="b-stat-input" placeholder="Base Atk2+" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAbility">
+                    <span class="b-stat-check-label">Ability</span>
+                  </label>
+                  <input type="text" id="inputAbility" class="b-stat-input" placeholder="Base Ability" disabled>
+                </div>
+
+                <div class="b-stat-row">
+                  <label class="b-stat-check">
+                    <input type="checkbox" id="chkAbilityp">
+                    <span class="b-stat-check-label">Ability+</span>
+                  </label>
+                  <input type="text" id="inputAbilityp" class="b-stat-input" placeholder="Base Ability+" disabled>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!-- /.builder-panel-body -->
+        </div><!-- /.builder-panel -->
+
+        <!-- ── RIGHT: Results ── -->
+        <div class="builder-results" id="builderResults">
+
+          <!-- Placeholder -->
+          <div class="builder-placeholder" id="builderPlaceholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+            <p data-i18n="mbPlaceholder">Selecciona un mutante para comenzar</p>
+          </div>
+
+          <!-- Mutant preview (hidden until selected) -->
+          <div class="mutant-preview" id="mutantPreview" style="display:none;">
+            <img id="mutantImage" src="" alt="Mutant" class="mutant-preview-img">
+            <div class="mutant-preview-info">
+              <div class="mutant-preview-name" id="previewName">—</div>
+              <div class="mutant-preview-meta" id="previewMeta"></div>
+            </div>
+          </div>
+
+          <!-- Stats results (hidden until selected) -->
+          <div class="results-panel" id="resultsPanel" style="display:none;">
+            <div class="results-panel-header">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span data-i18n="mbStatsTitle">STATS</span>
+              — <span data-i18n="mbLevelLabel">Nivel</span> <span id="resultLevel">—</span>
+            </div>
+            <div class="results-grid" id="resultsContainer">
+
+              <!-- HP -->
+              <div class="stat-card" id="resultHP-wrapper">
+                <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/common_files/icon_hp.png" class="stat-card-icon" alt="HP">
+                <div class="stat-card-value val-normal" id="resultHP">—</div>
+                <div class="stat-card-sub">HP</div>
+              </div>
+
+              <!-- Speed -->
+              <div class="stat-card" id="resultSpeed-wrapper">
+                <img src="https://s-ak.kobojo.com/mutants/assets/mobile/hud/common_files/icon_speed.png" class="stat-card-icon" alt="Speed">
+                <div class="stat-card-value val-normal" id="resultSpeed">—</div>
+                <div class="stat-card-sub">Speed</div>
+              </div>
+
+              <!-- Atk1 -->
+              <div class="stat-card" id="resultAtk1-wrapper">
+                <div id="gene1-img" class="stat-card-icon mb-gene-icon-container"></div>
+                <div class="stat-card-value val-normal" id="resultAtk1">—</div>
+                <div class="stat-card-sub">Atk 1</div>
+              </div>
+
+              <!-- Atk1+ -->
+              <div class="stat-card" id="resultAtk1p-wrapper" class="stat-card d-none">
+                <div id="gene1p-img" class="stat-card-icon mb-gene-icon-container"></div>
+                <div class="stat-card-value val-normal" id="resultAtk1p">—</div>
+                <div class="stat-card-sub">Atk 1+</div>
+              </div>
+
+              <!-- Atk2 -->
+              <div class="stat-card" id="resultAtk2-wrapper">
+                <div id="gene2-img" class="stat-card-icon mb-gene-icon-container"></div>
+                <div class="stat-card-value val-normal" id="resultAtk2">—</div>
+                <div class="stat-card-sub">Atk 2</div>
+              </div>
+
+              <!-- Atk2+ -->
+              <div class="stat-card" id="resultAtk2p-wrapper" class="stat-card d-none">
+                <div id="gene2p-img" class="stat-card-icon mb-gene-icon-container"></div>
+                <div class="stat-card-value val-normal" id="resultAtk2p">—</div>
+                <div class="stat-card-sub">Atk 2+</div>
+              </div>
+
+              <!-- Ability (Atk1) -->
+              <div class="stat-card" id="resultAbility1-wrapper">
+                <div id="ability1-img" class="stat-card-icon" style="display:flex;align-items:center;justify-content:center;"></div>
+                <div class="stat-card-value val-normal" id="resultAbility1">—</div>
+                <div class="stat-card-sub">Ability (Atk1)</div>
+              </div>
+
+              <!-- Ability (Atk2) -->
+              <div class="stat-card" id="resultAbility2-wrapper">
+                <div id="ability2-img" class="stat-card-icon" style="display:flex;align-items:center;justify-content:center;"></div>
+                <div class="stat-card-value val-normal" id="resultAbility2">—</div>
+                <div class="stat-card-sub">Ability (Atk2)</div>
+              </div>
+
+              <!-- Ability+ (Atk1+) -->
+              <div class="stat-card" id="resultAbilityp1-wrapper" class="stat-card d-none">
+                <div id="abilityp1-img" class="stat-card-icon" style="display:flex;align-items:center;justify-content:center;"></div>
+                <div class="stat-card-value val-normal" id="resultAbilityp1">—</div>
+                <div class="stat-card-sub">Ability+ (Atk1+)</div>
+              </div>
+
+              <!-- Ability+ (Atk2+) -->
+              <div class="stat-card" id="resultAbilityp2-wrapper" class="stat-card d-none">
+                <div id="abilityp2-img" class="stat-card-icon" style="display:flex;align-items:center;justify-content:center;"></div>
+                <div class="stat-card-value val-normal" id="resultAbilityp2">—</div>
+                <div class="stat-card-sub">Ability+ (Atk2+)</div>
+              </div>
+
+            </div>
+          </div><!-- /.results-panel -->
+
+        </div><!-- /.builder-results -->
+      </div><!-- /.builder-layout -->
+    </main>
+
+    <footer class="site-footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="/js/names-es.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/builder.js"></script>
+<script src="/js/footer.js"></script>
+
+</body>
+</html>
