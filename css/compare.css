@@ -1,0 +1,636 @@
+/* ============================================================
+   MGG TOOLS — Mutant Comparator  (redesigned)
+   css/compare.css
+   ============================================================ */
+
+/* ── Controls bar ───────────────────────────────────── */
+.cmp-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.cmp-level-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+}
+
+.cmp-level-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cmp-level-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cmp-level-btn {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  line-height: 1;
+  padding: 0;
+}
+.cmp-level-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(79,163,224,0.08);
+}
+
+.cmp-level-input {
+  width: 72px;
+  padding: 5px 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--accent-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.cmp-level-input:focus { border-color: var(--accent-primary); }
+
+/* Action buttons */
+.cmp-add-btn,
+.cmp-reset-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.cmp-add-btn {
+  background: rgba(79,163,224,0.08);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-primary);
+}
+.cmp-add-btn:hover {
+  background: rgba(79,163,224,0.15);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.cmp-add-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cmp-reset-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+.cmp-reset-btn:hover {
+  border-color: var(--accent-danger);
+  color: var(--accent-danger);
+  background: rgba(224,80,80,0.06);
+}
+
+/* ── Slots row ──────────────────────────────────────── */
+.cmp-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+  align-items: start;
+}
+
+/* ── Individual slot ────────────────────────────────── */
+.cmp-slot {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+}
+
+.cmp-slot::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-gold));
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.cmp-slot.cmp-slot--filled {
+  border-color: var(--border-accent);
+}
+.cmp-slot.cmp-slot--filled::before {
+  opacity: 1;
+}
+
+.cmp-slot-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: all var(--transition);
+  padding: 0;
+  z-index: 2;
+}
+.cmp-slot-close:hover {
+  background: rgba(224,80,80,0.12);
+  border-color: var(--accent-danger);
+  color: var(--accent-danger);
+}
+
+/* ── Search ─────────────────────────────────────────── */
+.cmp-slot-search-wrap { position: relative; }
+.cmp-slot-search-icon {
+  position: absolute; left: 10px; top: 50%;
+  transform: translateY(-50%);
+  width: 13px; height: 13px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.cmp-slot-input {
+  width: 100%;
+  padding: 9px 10px 9px 30px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.cmp-slot-input::placeholder { color: var(--text-muted); }
+.cmp-slot-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ── Grid dropdown ──────────────────────────────────── */
+.cmp-slot-grid {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 400;
+  padding: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+  margin-top: 4px;
+}
+.cmp-grid-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.cmp-grid-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition);
+}
+.cmp-grid-card:hover {
+  border-color: var(--accent-primary);
+  background: rgba(79,163,224,0.08);
+  transform: translateY(-2px);
+}
+.cmp-grid-card img {
+  width: 52px; height: 52px;
+  object-fit: contain;
+  display: block;
+}
+.cmp-grid-card span {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* ── Slot preview ───────────────────────────────────── */
+.cmp-slot-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.cmp-slot-img {
+  width: 110px; height: 110px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  display: block;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.cmp-slot-img:hover { transform: scale(1.05); }
+
+.cmp-slot-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.cmp-slot-genes {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.cmp-slot-star {
+  width: 100%;
+  padding: 7px 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9ab5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.cmp-slot-star:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.cmp-slot-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.cmp-slot-clear:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(79,163,224,0.06);
+}
+
+/* ── Empty slot ─────────────────────────────────────── */
+.cmp-slot-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 120px;
+  color: var(--text-muted);
+}
+.cmp-slot-empty svg { opacity: 0.15; }
+
+/* ── Comparison table ───────────────────────────────── */
+.cmp-table-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  overflow-x: auto;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+.cmp-table-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-gold));
+  z-index: 1;
+}
+
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+/* ── Table header ───────────────────────────────────── */
+.cmp-th-stat {
+  padding: 22px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  min-width: 120px;
+  vertical-align: bottom;
+}
+
+.cmp-th-mutant {
+  padding: 20px 16px 16px;
+  text-align: center;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  min-width: 180px;
+  vertical-align: bottom;
+}
+
+.cmp-th-img {
+  width: 96px; height: 96px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  display: block;
+  margin: 0 auto 12px;
+  transition: transform 0.2s;
+}
+.cmp-th-img:hover { transform: scale(1.05); }
+
+.cmp-th-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+
+.cmp-th-genes {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.cmp-th-star {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.74rem;
+  color: var(--accent-gold);
+  min-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Stat rows ──────────────────────────────────────── */
+.cmp-td-label {
+  padding: 14px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.cmp-td-label-inner {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.cmp-td-icon {
+  width: 22px; height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.cmp-td-label-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cmp-table tbody tr:last-child .cmp-td-label,
+.cmp-table tbody tr:last-child .cmp-td-val { border-bottom: none; }
+
+.cmp-table tbody tr:hover .cmp-td-label { color: var(--text-secondary); }
+
+/* ── Value cells ────────────────────────────────────── */
+.cmp-td-val {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  text-align: center;
+  vertical-align: middle;
+  transition: background var(--transition);
+  min-width: 180px;
+  position: relative;
+}
+
+.cmp-table tbody tr:hover .cmp-td-val {
+  background: rgba(79,163,224,0.03);
+}
+
+.cmp-td-best {
+  background: rgba(79,163,224,0.07) !important;
+}
+.cmp-td-best::after {
+  content: '▲';
+  position: absolute;
+  top: 7px; right: 9px;
+  font-size: 0.5rem;
+  color: var(--accent-primary);
+  opacity: 0.7;
+}
+
+.cmp-val-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  overflow: visible;
+  min-height: 26px;
+}
+
+.cmp-val-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.cmp-val-hp  { color: #e05050; }
+.cmp-val-atk { color: var(--accent-primary); }
+.cmp-val-spd { color: var(--accent-gold); }
+
+/* Progress bars */
+.cmp-bar-wrap {
+  height: 3px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cmp-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+.cmp-bar-hp  { background: linear-gradient(90deg, #c03030, #e05050); }
+.cmp-bar-atk { background: linear-gradient(90deg, #3680c2, var(--accent-primary)); }
+.cmp-bar-spd { background: linear-gradient(90deg, #c07020, var(--accent-gold)); }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cmp-slots { flex-direction: column; }
+  .cmp-slot  { max-width: 100%; }
+  .cmp-slot-img { width: 90px; height: 90px; }
+}
+/* ── ATK gene icons in comparison table ─────────────── */
+
+/* Container — all layers (gene, plus, multi) stack inside here */
+.cmp-gene-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;         /* ← igual al tamaño del gen */
+  height: 40px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+/* Gen — capa media */
+.cmp-gene-img {
+  width: 40px;         /* ← tamaño del gen */
+  height: 40px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+/* ATK+ — detrás del gen y del multi */
+.cmp-gene-plus {
+  width: 40px;         /* ← tamaño del plus */
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  top: -2px;            /* ← sube(negativo)/baja(positivo) */
+  left: 65%;           /* ← izquierda/derecha */
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Multi — encima de todo */
+.cmp-gene-multi {
+  width: 30px;         /* ← tamaño del multi */
+  height: 30px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 9px;        /* ← sube(negativo)/baja(positivo) desde abajo */
+  right: -8px;         /* ← negativo=más derecha */
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* cmp-gene-wrap — alias por compatibilidad */
+.cmp-gene-wrap {
+  display: inline-flex;
+  align-items: center;
+  overflow: visible;
+}
+
+/* ── Ability icon + ATK plus overlay ────────────────── */
+ 
+.cmp-ability-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;         /* ← igual al tamaño del ícono habilidad */
+  height: 60px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+ 
+.cmp-ability-img {
+  width: 40px;         /* ← tamaño del ícono de habilidad */
+  height: 40px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  vertical-align: middle;
+}
+
+.cmp-ability-plus {
+  width: 50px;         /* ← tamaño del plus de habilidad */
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  top: 11px;            /* ← sube(negativo)/baja(positivo) */
+  left: 67%;           /* ← izquierda/derecha */
+  transform: translateX(-60%);
+  z-index: 1;
+  pointer-events: none;
+}
