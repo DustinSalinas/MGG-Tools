@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MGG Tools — Guía de Obtención</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/howtoget.css" />
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+</head>
+<body class="app-container">
+
+  <div class="modal-overlay" id="recipeModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <h2 id="modalMutantName">Mutante</h2>
+      </div>
+      <div class="modal-tabs" id="modalTabs"></div>
+      <div id="modalDynamicContent" class="modal-body"></div>
+    </div>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <svg class="brand-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M16 3L28 9V23L16 29L4 23V9L16 3Z" stroke="#4fa3e0" stroke-width="1.5" fill="rgba(79,163,224,0.08)"/>
+        <path d="M10 14l4 4 8-6" stroke="#f0a030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="16" r="3" fill="#4fa3e0" opacity="0.5"/>
+      </svg>
+      <span class="brand-name">MGG Tools</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="index.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="nav-label" data-i18n="home">Home</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionApps">APPS</div>
+      <a class="nav-item" href="mutants-list.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg>
+        <span class="nav-label" data-i18n="mutantsList">Mutants List</span>
+      </a>
+      <a class="nav-item" href="stats.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-label" data-i18n="statsSimulator">Stats Simulator</span>
+      </a>
+      <a class="nav-item" href="evo-calculator.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span class="nav-label" data-i18n="evoCalculator">Evo Calculator</span>
+      </a>
+      <a class="nav-item" href="top-mutants.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        <span class="nav-label" data-i18n="topMutants">Top Mutants</span>
+      </a>
+      <a class="nav-item" href="damage-simulator.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 0 0-3 3l-7 3.5L5 7l-.5.5 4 3L7 13.5l-.5.5 3 1.5 1.5 3 .5-.5-1-2.5 3-1.5 3 4.5.5-.5L15 14l3.5-7A3 3 0 0 0 18 3z"/></svg>
+        <span class="nav-label" data-i18n="damageSimulator">Damage Simulator</span>
+      </a>
+      <a class="nav-item" href="mutant-builder.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span class="nav-label" data-i18n="mutantBuilder">Mutant Builder</span>
+      </a>
+      <a class="nav-item" href="compare.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        <span class="nav-label" data-i18n="compareMutants">Compare</span>
+      </a>
+      <a class="nav-item" href="breeding.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="4"/><circle cx="16" cy="12" r="4"/><path d="M12 8v8"/></svg>
+        <span class="nav-label" data-i18n="breedingSimulator">Simulador de Cría</span>
+      </a>
+      <a class="nav-item active" href="howtoget.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span class="nav-label" data-i18n="howtoget">How to get?</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionInfo">INFO</div>
+      <a class="nav-item" href="rebalance.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <span class="nav-label" data-i18n="rebalance">Rebalance</span>
+      </a>
+      <div class="nav-section-label" data-i18n="sectionDocs">DOCUMENTATION</div>
+      <a class="nav-item" href="credits.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="nav-label" data-i18n="credits">Credits</span>
+      </a>
+      <a class="nav-item" href="changelog.html">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+        <span class="nav-label" data-i18n="changelog">Changelog</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="collapse-btn" id="collapseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+        <span id="collapseLabel" data-i18n="collapseMenu">Collaps</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-controls">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="es"><span class="flag">🇪🇸</span> ES</button>
+          <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> EN</button>
+        </div>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+      <div class="hero-header">
+        <h1 data-i18n-html="pageTitle_howtoget"></h1>
+        <p data-i18n="pageDesc_howtoget"></p>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-wrapper">
+          <input type="text" id="getSearch" placeholder="Buscar por nombre...">
+          <span class="search-icon">🔍</span>
+        </div>
+        <div class="method-filters" id="methodFilters">
+          <button class="filter-btn active" data-method="all">Todos</button>
+          <button class="filter-btn" data-method="shop">Tienda</button>
+          <button class="filter-btn" data-method="breeding">Cría</button>
+          <button class="filter-btn" data-method="bingo">Bingo</button>
+          <button class="filter-btn" data-method="reactor">Reactor</button>
+          <button class="filter-btn" data-method="exchange">Exchange</button>
+          <button class="filter-btn" data-method="raid">Raid</button>
+          <button class="filter-btn" data-method="event">Eventos</button>
+          <button class="filter-btn" data-method="unavailable">No disponible</button>
+        </div>
+      </div>
+
+      <div class="results-count" id="resultsCount"></div>
+      <div class="obtain-grid" id="obtainGrid"></div>
+      <div class="pagination" id="paginationControls"></div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-left">© 2026 MGG Tools — Dustin Salinas</div>
+      <div class="footer-right">Versión <span class="footer-version">v2.9</span></div>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <script src="js/howtoget-data.js"></script>
+  <script src="js/names-es.js"></script>
+  <script src="js/app.js"></script> 
+  <script src="js/howtoget.js"></script>
+
+</body>
+</html>
