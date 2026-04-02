@@ -1,0 +1,746 @@
+/* ============================================================
+   MGG TOOLS — Damage Simulator Stylesheet
+   css/damage-simulator.css
+   ============================================================ */
+
+/* ── Layout: 2 equal panels side by side ─────────────── */
+.ds-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+/* ── Panel ───────────────────────────────────────────── */
+.ds-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.ds-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-panel-header svg { color: var(--accent-primary); flex-shrink: 0; }
+
+.ds-panel-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ── Fields ──────────────────────────────────────────── */
+.ds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.ds-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ds-label-sm {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ── Inputs ──────────────────────────────────────────── */
+.ds-search-wrap { position: relative; }
+
+.ds-search-icon {
+  position: absolute;
+  left: 11px; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.ds-input {
+  width: 100%;
+  padding: 10px 12px 10px 34px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ds-nopad { padding-left: 12px; }
+.ds-input::placeholder { color: var(--text-muted); }
+.ds-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.ds-atk-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ds-atk-val {
+  background: var(--bg-surface);
+  border-color: var(--border-accent);
+  color: var(--accent-primary);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ── Mutant grid dropdown ────────────────────────────── */
+.ds-grid-dropdown {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 8px;
+  margin-top: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  z-index: 200;
+}
+
+.mutants-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.mutant-card {
+  padding: 7px 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition);
+}
+
+.mutant-card:hover {
+  border-color: var(--accent-primary);
+  background: rgba(79,163,224,0.08);
+  transform: translateY(-2px);
+}
+
+.mutant-card-image {
+  width: 56px; height: 56px;
+  object-fit: contain;
+}
+
+.mutant-card-name {
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  margin: 0;
+  word-break: break-word;
+}
+
+.mutant-genes { display: flex; justify-content: center; gap: 3px; }
+.gene-icon { width: 12px; height: 12px; object-fit: contain; }
+
+/* ── Mutant image ────────────────────────────────────── */
+.ds-mutant-image {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.selected-mutant-image {
+  width: 88px; height: 88px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+}
+
+/* ── Orb slots ───────────────────────────────────────── */
+.ds-orb-slots {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+
+.orb-slot-item {
+  position: relative;
+  width: 66px; height: 66px;
+  display: inline-block;
+}
+
+.orb-image-main {
+  width: 66px; height: 66px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform var(--transition);
+  display: block;
+}
+
+.orb-image-main:hover { transform: scale(1.08); }
+
+.orb-inside {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.35); /* 🔥 clave */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Bootstrap dropdown override for orb menus */
+.orb-dropdown .dropdown-menu-dark {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-accent) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 5px !important;
+  min-width: 160px;
+  max-width: 200px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+
+.orb-dropdown .dropdown-item {
+  color: var(--text-secondary) !important;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem;
+  padding: 7px 10px !important;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background var(--transition);
+}
+
+.orb-dropdown .dropdown-item:hover {
+  background: rgba(79,163,224,0.1) !important;
+  color: var(--text-primary) !important;
+}
+
+.orb-dropdown .dropdown-divider {
+  border-color: var(--border-color) !important;
+  margin: 4px 0 !important;
+}
+
+.orb-icon { width: 22px; height: 22px; object-fit: contain; }
+.orb-icon-small { width: 20px; height: 20px; object-fit: contain; }
+
+.orb-submenu-panel {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 3000;
+}
+
+/* ── Orb dropdown menu scroll (igual que stats simulator) ── */
+.ds-orb-menu {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+/* ── Gene buttons (now unified with value display) ───── */
+.ds-atk-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ds-atk-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px 12px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  min-height: 90px;
+}
+
+.ds-atk-btn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(79,163,224,0.06);
+}
+
+/* Active — blue glow, bright value */
+.ds-atk-btn.active-gene-btn {
+  border-color: var(--accent-primary);
+  background: rgba(79,163,224,0.12);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.ds-atk-btn.active-gene-btn .ds-atk-btn-gene-img {
+  filter: none;
+  opacity: 1;
+}
+
+.ds-atk-btn.active-gene-btn .ds-atk-btn-val {
+  color: var(--accent-primary);
+}
+
+/* Inactive — greyed out */
+.ds-atk-btn.inactive-gene-btn {
+  border-color: var(--border-color);
+  opacity: 0.45;
+}
+
+.ds-atk-btn.inactive-gene-btn .ds-atk-btn-gene-img {
+  filter: grayscale(80%);
+}
+
+.ds-atk-btn-gene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+}
+
+.ds-atk-btn-gene-img {
+  width: 36px; height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+  transition: filter var(--transition), opacity var(--transition);
+}
+
+.ds-atk-btn-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+/* Legacy compat */
+.gene-button-img { display: none; }
+.grayscale-filter { filter: grayscale(100%); }
+
+/* ── Modifiers (toggle switches) ─────────────────────── */
+.ds-modifiers {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ds-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds-toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px; height: 20px;
+  flex-shrink: 0;
+}
+
+.ds-toggle input { opacity: 0; width: 0; height: 0; }
+
+.ds-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.ds-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  left: 2px; top: 2px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.ds-toggle input:checked + .ds-toggle-slider {
+  background: rgba(79,163,224,0.2);
+  border-color: var(--accent-primary);
+}
+
+.ds-toggle input:checked + .ds-toggle-slider::before {
+  transform: translateX(16px);
+  background: var(--accent-primary);
+}
+
+.ds-toggle-label {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.ds-sub-input {
+  padding-left: 46px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Version sliders ─────────────────────────────────── */
+.ds-version-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ds-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds-slider-lbl {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.ds-range {
+  flex: 1;
+  accent-color: var(--accent-primary);
+  height: 4px;
+  cursor: pointer;
+}
+
+.ds-slider-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 44px;
+  text-align: right;
+  color: var(--accent-primary);
+}
+
+/* ── Calculate button ────────────────────────────────── */
+.ds-calc-row {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 20px;
+}
+
+.ds-calc-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.ds-calc-btn:hover {
+  background: #5fb3ee;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(79,163,224,0.35);
+}
+
+/* ── Results ─────────────────────────────────────────── */
+.ds-results-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.ds-results-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-gold));
+}
+
+.ds-results-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ds-results-header svg { color: var(--accent-gold); }
+
+.ds-results-body {
+  padding: 20px;
+}
+
+.ds-results-placeholder {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 24px 0;
+}
+
+.ds-results-placeholder svg {
+  margin: 0 auto 12px;
+  display: block;
+  opacity: 0.2;
+}
+
+.ds-results-placeholder p { font-size: 0.88rem; }
+
+/* Result content injected by JS */
+.ds-results-body h5 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.ds-results-body .text-success { color: var(--accent-success) !important; }
+.ds-results-body .text-danger  { color: var(--accent-danger)  !important; }
+.ds-results-body .text-primary { color: var(--accent-primary) !important; }
+.ds-results-body .text-warning { color: var(--accent-gold)    !important; }
+.ds-results-body .text-info    { color: #5bc0de               !important; }
+
+.ds-results-body p  {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.ds-results-body strong { color: var(--text-primary); }
+.ds-results-body .fs-5, .ds-results-body .fs-6 { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--accent-primary); }
+.ds-results-body .fs-5 { font-size: 1.15rem !important; }
+
+.ds-results-body hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 10px 0;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .ds-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .mutants-grid { grid-template-columns: repeat(3, 1fr); }
+  .ds-gene-btns { gap: 6px; }
+}
+
+/* ── Custom orb menu items (no Bootstrap) ────────────── */
+.ds-orb-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  color: var(--text-secondary);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+  white-space: nowrap;
+}
+
+.ds-orb-menu-item:hover {
+  background: rgba(79,163,224,0.1);
+  color: var(--text-primary);
+}
+
+.ds-orb-remove {
+  color: var(--accent-danger) !important;
+}
+
+.ds-orb-remove:hover {
+  background: rgba(224,80,80,0.08) !important;
+}
+
+.ds-orb-back {
+  color: var(--accent-primary);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 4px;
+}
+
+.ds-orb-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 3px 0;
+}
+
+.ds-orb-icon {
+  width: 26px; height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── Multi-attack icon overlay ───────────────────────── */
+.ds-atk-gene-wrap {
+  position: relative;
+  width: 46px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ds-atk-btn-gene-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+  transition: filter var(--transition), opacity var(--transition);
+}
+
+.ds-atk-multi-icon {
+  position: absolute;
+  bottom: 3px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.6));
+}
+
+/* ── ATK+ overlay ─────────────────────────────────────
+   Mismo sistema que stats.css: ds-gene-anchor envuelve
+   solo el gen (tamaño fijo = gen), el plus se ancla a él.
+   ──────────────────────────────────────────────────── */
+.ds-gene-anchor {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.ds-gene-anchor .ds-atk-btn-gene-img {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-atk-plus {
+  width: 42px !important;
+  height: auto !important;
+  object-fit: contain;
+  opacity: 1;
+  position: absolute;
+  top: -1px;
+  left: 63%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Orb slot sizes — edit here to resize ───────────── */
+
+.ds-orb-slot {
+  position: relative;
+  width: 66px;           /* ← tamaño del slot */
+  height: 66px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ds-orb-slot-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
+}
+
+.ds-orb-slot-bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.ds-orb-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none;
+  /* Cambia el número de scale para ajustar el tamaño del orbe */
+  /* 1.9 = tamaño original, 2.5 = más grande, 1.2 = más pequeño */
+  transform: translate(-50%, -50%) scale(1.9);
+  transform-origin: center center;
+}
