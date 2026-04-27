@@ -2,6 +2,14 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <script>
+  (function() {
+    var theme = localStorage.getItem('mgg-theme') || 'dark';
+    var lang  = localStorage.getItem('mgg-lang')  || 'es';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-lang-pending', lang);
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGG Tools — Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
