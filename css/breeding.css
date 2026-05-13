@@ -4,12 +4,15 @@
 
 /* ── Layout ── */
 .breeding-page {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 24px;
-  align-items: start;
+  display: block;
 }
-.breeding-main { display: flex; flex-direction: column; gap: 24px; min-width: 0; overflow: hidden; }
+.breeding-main {
+  display: flex; flex-direction: column; gap: 24px; min-width: 0; overflow: hidden;
+  transition: padding-right 0.25s;
+}
+.breeding-main.panel-open {
+  padding-right: 344px;
+}
 
 /* ── Slots area ── */
 .slots-row {
@@ -97,13 +100,15 @@
   border: 1px solid var(--border-color);
   border-radius: 12px;
   overflow: hidden;
-  max-width: 620px;
+  width: fit-content;
+  max-width: 100%;
   margin: 0 auto;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 .results-table-header {
   display: grid;
-  grid-template-columns: 56px 1fr 100px 48px;
+  grid-template-columns: 52px 52px minmax(120px, max-content) 80px 48px;
+  justify-items: center;
   padding: 6px 12px;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border-color);
@@ -115,8 +120,9 @@
 .results-table-body { display: flex; flex-direction: column; }
 .result-row {
   display: grid;
-  grid-template-columns: 56px 1fr 100px 48px;
+  grid-template-columns: 52px 52px minmax(120px, max-content) 80px 48px;
   gap: 8px; align-items: center;
+  justify-items: center;
   padding: 5px 12px;
   border-bottom: 1px solid var(--border-color);
   border-left: 3px solid transparent;
@@ -135,19 +141,53 @@
   from { opacity:0; transform: translateX(-6px); }
   to   { opacity:1; transform: translateX(0); }
 }
+.rr-larva-wrap {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  justify-self: center;
+  align-self: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rr-larva {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  display: block;
+}
+.rr-larva-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.8));
+  pointer-events: none;
+}
 .rr-thumb {
-  width: 44px; height: 44px; object-fit: contain;
+  width: 50px; height: 50px; object-fit: contain;
   image-rendering: pixelated;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 .rr-name {
-  font-family: 'Rajdhani', sans-serif; font-size: 0.92rem; font-weight: 700;
+  font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  justify-self: start;
+  align-self: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 .rr-genes { display: flex; gap: 4px; align-items: center; }
-.rr-gene { width: 20px; height: 20px; }
-.rr-cat-icon { width: 36px; height: 36px; object-fit: contain; justify-self: center; }
+.rr-gene { width: 26px; height: 26px; }
+.rr-cat-icon { width: 44px; height: 44px; object-fit: contain; justify-self: center; }
 
 .breed-empty {
   text-align: center; padding: 48px 20px;
@@ -160,10 +200,14 @@
   border: 1px solid var(--border-color);
   border-radius: 16px;
   display: flex; flex-direction: column;
-  height: calc(100vh - 140px);
-  position: sticky; top: 80px;
+  height: calc(100vh - 92px);
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  width: 320px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 200;
 }
 .panel-header {
   display: flex; align-items: center;
@@ -188,6 +232,18 @@
 }
 .slot-ind:hover { color: var(--text-primary); }
 .slot-ind.active { color: var(--accent-primary); border-bottom-color: var(--accent-primary); background: rgba(79,163,224,0.06); }
+
+#panelHeaderGuide {
+  padding: 0 12px;
+  min-height: 44px;
+  justify-content: space-between;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+}
 
 .panel-top {
   padding: 10px 12px;
@@ -285,3 +341,140 @@
   .slot-mutant-img { width: 80px; height: 80px; }
 }
 
+
+/* ── Mode Toggle ── */
+.breed-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.bmt-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bmt-label::before { font-size: 1rem; }
+.bmt-label-left::before { content: '⚗'; }
+.bmt-label-right::before { content: '📖'; }
+.bmt-label.active { color: var(--accent-primary, #4fc3f7); }
+.bmt-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.bmt-switch input { opacity: 0; width: 0; height: 0; }
+.bmt-slider {
+  position: absolute; cursor: pointer;
+  inset: 0; background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 24px; transition: 0.25s;
+}
+.bmt-slider::before {
+  content: '';
+  position: absolute;
+  height: 16px; width: 16px;
+  left: 3px; bottom: 3px;
+  background: var(--text-muted);
+  border-radius: 50%; transition: 0.25s;
+}
+.bmt-switch input:checked + .bmt-slider { background: var(--accent-primary, #4fc3f7); border-color: var(--accent-primary, #4fc3f7); }
+.bmt-switch input:checked + .bmt-slider::before { transform: translateX(20px); background: #fff; }
+
+/* ── Guide child slot ── */
+.guide-child-slot {
+  width: 160px; height: 160px;
+  border: 2px dashed var(--border-color);
+  border-radius: 16px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer; gap: 6px;
+  background: var(--bg-card);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  position: relative;
+  padding: 10px; box-sizing: border-box;
+}
+.guide-child-slot:hover {
+  border-color: var(--accent-primary, #4fc3f7);
+  background: var(--bg-card-hover);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+.guide-child-slot .slot-mutant-img { width: 76px; height: 76px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4)); }
+.guide-child-slot .slot-unknown { width: 52px; height: 52px; opacity: 0.15; }
+.guide-child-slot .slot-ph { font-size: 0.7rem; color: var(--text-muted); text-align: center; padding: 0 8px; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.04em; }
+.guide-child-slot .slot-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--text-primary); text-align: center; }
+.guide-child-slot .slot-genes { display: flex; gap: 3px; justify-content: center; }
+.guide-child-slot .slot-gene-img { width: 18px; height: 18px; }
+.guide-child-slot .slot-clear {
+  position: absolute; top: 6px; right: 6px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(200,40,40,0.85); border: none; color: #fff; font-size: 10px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.15s; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.guide-child-slot:hover .slot-clear { opacity: 1; }
+
+/* ── Guide pairs list ── */
+.guide-pairs-list {
+  display: flex; flex-direction: column; gap: 10px;
+  max-width: 480px; margin: 0 auto;
+}
+.guide-pair-row {
+  display: flex; align-items: stretch; gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  animation: row-in 0.2s ease both;
+}
+.guide-pair-row:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(79,163,224,0.12);
+}
+.guide-parent {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 6px;
+  flex: 1; padding: 14px 12px;
+  text-align: center;
+}
+.guide-parent img.rr-thumb {
+  width: 64px; height: 64px; object-fit: contain;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+.guide-parent-info { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.guide-parent-info .rr-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.guide-cross {
+  font-size: 1rem; font-weight: 900;
+  color: var(--text-muted);
+  padding: 0 14px;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+/* ── Not breedable message ── */
+.breed-not-breedable {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; padding: 24px 20px;
+  background: rgba(200, 60, 60, 0.07);
+  border: 1px solid rgba(200, 60, 60, 0.25);
+  border-radius: 12px;
+  max-width: 420px; margin: 0 auto;
+  text-align: center; line-height: 1.6;
+  color: var(--text-secondary);
+}
+.not-breedable-icon { width: 80px; height: 80px; object-fit: contain; }
+.breed-not-breedable strong { color: var(--accent-danger, #e05555); }
