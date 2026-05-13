@@ -2,6 +2,14 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <script id="mgg-flash-fix">
+    (function() {
+      var theme = localStorage.getItem('mgg-theme') || 'dark';
+      var lang  = localStorage.getItem('mgg-lang')  || 'es';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-lang-pending', lang);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGG Tools — Simulador de Cruce</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -109,13 +117,44 @@
         <p data-i18n="pageDesc_breeding"></p>
       </div>
 
+      <!-- Mode toggle -->
+      <div class="breed-mode-toggle" id="breedModeToggle">
+        <span class="bmt-label bmt-label-left active" id="bmtLabelCalc">Breeding Calculator</span>
+        <label class="bmt-switch">
+          <input type="checkbox" id="breedModeCheck" onchange="toggleBreedMode(this.checked)">
+          <span class="bmt-slider"></span>
+        </label>
+        <span class="bmt-label bmt-label-right" id="bmtLabelGuide">Breeding Guide</span>
+      </div>
+
+      <!-- Guide mode: single child slot -->
+      <div id="breedGuideSection" style="display:none;">
+        <div class="breeding-page" id="breedGuidePage" style="grid-template-columns:1fr;">
+          <div class="breeding-main">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+              <div class="guide-child-slot" id="guideSlot" onclick="openGuidePanel()">
+                <img src="https://s-ak.kobojo.com/mutants/assets/thumbnails/specimen_default.png" alt="?" class="slot-unknown" onerror="this.style.opacity='0.2'">
+                <span class="slot-ph" id="guideSlotPh">Click to select a mutant</span>
+              </div>
+              <div style="width:100%;max-width:700px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                  <h2 class="section-heading" style="margin-bottom:0;flex:1" id="guideHeading">Possible Parents</h2>
+                  <span id="guideTotal" style="font-size:0.78rem;color:var(--text-muted);"></span>
+                </div>
+                <div id="guideResults"><div class="breed-empty" data-i18n="brGuideEmpty">Selecciona un mutante para ver con qué padres puede obtenerse.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="breeding-page" id="breedingPage" style="grid-template-columns:1fr;">
 
         <!-- ── LEFT: slots + results ── -->
         <div class="breeding-main">
 
-          <!-- Slots con selector de estrella centrado arriba -->
-          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <!-- Slots con selector de estrella centrado -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
             <div id="starDropdown" class="star-dropdown">
               <button class="star-selected" onclick="toggleStarMenu(event)">
                 <div class="star-bg-wrap">
@@ -127,16 +166,16 @@
                 </button>
               </button>
               <div class="star-menu" id="starMenu">
-                <button class="star-option" onclick="pickStar('bronze', T('brStarBronze'), this)">
+                <button class="star-option" onclick="pickStar('bronze', 'brStarBronze', this)">
                   <img src="https://s-ak.kobojo.com/mutants/assets/mobile/thumbnails/star_bronze.png" alt=""> <span data-i18n="brStarBronze">Bronce</span>
                 </button>
-                <button class="star-option" onclick="pickStar('silver', T('brStarSilver'), this)">
+                <button class="star-option" onclick="pickStar('silver', 'brStarSilver', this)">
                   <img src="https://s-ak.kobojo.com/mutants/assets/mobile/thumbnails/star_silver.png" alt=""> <span data-i18n="brStarSilver">Plata</span>
                 </button>
-                <button class="star-option" onclick="pickStar('gold', T('brStarGold'), this)">
+                <button class="star-option" onclick="pickStar('gold', 'brStarGold', this)">
                   <img src="https://s-ak.kobojo.com/mutants/assets/mobile/thumbnails/star_gold.png" alt=""> <span data-i18n="brStarGold">Oro</span>
                 </button>
-                <button class="star-option" onclick="pickStar('platinum', T('brStarPlatinum'), this)">
+                <button class="star-option" onclick="pickStar('platinum', 'brStarPlatinum', this)">
                   <img src="https://s-ak.kobojo.com/mutants/assets/mobile/thumbnails/star_platinum.png" alt=""> <span data-i18n="brStarPlatinum">Platino</span>
                 </button>
               </div>
@@ -170,32 +209,37 @@
 
         </div>
 
-        <!-- ── RIGHT: selection panel ── -->
-        <div class="breeding-panel" id="breedingPanel" style="display:none;">
+      </div>
 
-          <!-- Panel header with slot tabs + close -->
-          <div class="panel-header">
-            <div class="slot-indicator">
-              <div class="slot-ind active" id="ind-0" onclick="setActiveSlot(0)" data-i18n="brParent1">Padre 1</div>
-              <div class="slot-ind" id="ind-1" onclick="setActiveSlot(1)" data-i18n="brParent2">Padre 2</div>
-            </div>
-            <button class="panel-close-btn" onclick="togglePanel(false)" title="Cerrar panel">✕</button>
+      <!-- ── Panel de selección (compartido entre ambos modos) ── -->
+      <div class="breeding-panel" id="breedingPanel" style="display:none;">
+
+        <!-- Panel header: slots tabs (calc mode) OR single label (guide mode) -->
+        <div class="panel-header" id="panelHeaderCalc">
+          <div class="slot-indicator">
+            <div class="slot-ind active" id="ind-0" onclick="setActiveSlot(0)" data-i18n="brParent1">Padre 1</div>
+            <div class="slot-ind" id="ind-1" onclick="setActiveSlot(1)" data-i18n="brParent2">Padre 2</div>
           </div>
+          <button class="panel-close-btn" onclick="togglePanel(false)" title="Cerrar panel">✕</button>
+        </div>
+        <div class="panel-header" id="panelHeaderGuide" style="display:none;">
+          <span style="font-weight:700;font-size:0.95rem;" data-i18n="brGuideSelectChild">Seleccionar mutante hijo</span>
+          <button class="panel-close-btn" onclick="togglePanel(false)" title="Cerrar panel">✕</button>
+        </div>
 
-          <!-- Search + gene filters -->
-          <div class="panel-top">
-            <input type="text" class="panel-search" id="panelSearch" data-i18n="brSearchPlaceholder" placeholder="Buscar mutante por nombre...">
-            <div class="gene-filter-row" id="geneBtns"></div>
-          </div>
+        <!-- Search + gene filters -->
+        <div class="panel-top">
+          <input type="text" class="panel-search" id="panelSearch" data-i18n="brSearchPlaceholder" placeholder="Buscar mutante por nombre...">
+          <div class="gene-filter-row" id="geneBtns"></div>
+        </div>
 
-          <!-- Mutant grid -->
-          <div class="panel-grid" id="searchPanelGrid">
-            <div class="panel-empty" data-i18n="loading">Cargando mutantes...</div>
-          </div>
-
+        <!-- Mutant grid -->
+        <div class="panel-grid" id="searchPanelGrid">
+          <div class="panel-empty" data-i18n="loading">Cargando mutantes...</div>
         </div>
 
       </div>
+
     </main>
 
     <footer class="site-footer"></footer>
