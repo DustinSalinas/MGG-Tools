@@ -2,6 +2,14 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <script id="mgg-flash-fix">
+    (function() {
+      var theme = localStorage.getItem('mgg-theme') || 'dark';
+      var lang  = localStorage.getItem('mgg-lang')  || 'es';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-lang-pending', lang);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGG Tools — Evo Calculator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -111,6 +119,16 @@
         <p data-i18n="pageDesc_evo"></p>
       </div>
 
+      <!-- Mode toggle -->
+      <div class="evo-mode-toggle" id="evoModeToggle">
+        <span class="evo-mode-label evo-mode-label-left active" id="evoToggleLabelRes" data-i18n="evoToggleLabelRes">Calcular EVO</span>
+        <label class="evo-mode-switch">
+          <input type="checkbox" id="evoModeCheck" onchange="toggleEvoMode(this.checked)">
+          <span class="evo-mode-slider"></span>
+        </label>
+        <span class="evo-mode-label evo-mode-label-right" id="evoToggleLabelTarget" data-i18n="evoToggleLabelTarget">Costo requerido</span>
+      </div>
+
       <div class="evo-layout">
 
         <!-- ── LEFT: Calculator ── -->
@@ -128,13 +146,25 @@
             </div>
           </div>
 
+          <!-- EVO objetivo (target mode) -->
+          <div class="evo-field-group" id="evoTargetSection" style="display:none;">
+            <label class="evo-label" for="TargetEvo">
+              <span class="evo-label-icon">🎯</span>
+              <span data-i18n="evoTargetLabel">EVO Objetivo</span>
+            </label>
+            <div class="evo-input-wrap">
+              <input class="evo-input" type="text" id="TargetEvo" placeholder="Ej: 200" maxlength="10" inputmode="numeric" />
+              <span class="evo-input-suffix" data-i18n="evoSuffixEvo">EVO</span>
+            </div>
+          </div>
+
           <!-- Divider -->
-          <div class="evo-divider">
+          <div class="evo-divider" id="evoDivider">
             <span data-i18n="evoResourcesLabel">Recursos disponibles</span>
           </div>
 
           <!-- Credits + Gold row -->
-          <div class="evo-resources-row">
+          <div class="evo-resources-row" id="evoResourcesRow">
             <div class="evo-field-group">
               <label class="evo-label" for="Credits">
                 <img src="img/credits.png"
@@ -181,7 +211,7 @@
           </div>
 
           <!-- Calculate button -->
-          <button class="evo-calc-btn" id="calcBtn" onclick="doCalculate()">
+          <button class="evo-calc-btn" id="calcBtn" onclick="handleCalculate()">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             <span data-i18n="evoCalcBtn">Calcular</span>
           </button>
@@ -213,17 +243,25 @@
                 <span class="evo-step-num">1</span>
                 <span data-i18n="evoStep1">Introduce tu EVO actual (número de evoluciones acumuladas).</span>
               </div>
-              <div class="evo-info-step">
+              <div class="evo-info-step" id="evoStepRes">
                 <span class="evo-step-num">2</span>
                 <span data-i18n="evoStep2">Indica cuántos Créditos y Oro tienes disponibles.</span>
+              </div>
+              <div class="evo-info-step" id="evoStepTarget" style="display:none;">
+                <span class="evo-step-num">2</span>
+                <span data-i18n="evoStep2t">Introduce el EVO que quieres alcanzar.</span>
               </div>
               <div class="evo-info-step">
                 <span class="evo-step-num">3</span>
                 <span data-i18n="evoStep3">Si hay evento con descuento, selecciona o escribe el porcentaje.</span>
               </div>
-              <div class="evo-info-step">
+              <div class="evo-info-step" id="evoStepRes4">
                 <span class="evo-step-num">4</span>
                 <span data-i18n="evoStep4">Presiona Calcular y verás tu nuevo EVO proyectado.</span>
+              </div>
+              <div class="evo-info-step" id="evoStepTarget4" style="display:none;">
+                <span class="evo-step-num">4</span>
+                <span data-i18n="evoStep4t">Presiona Calcular y verás cuántos Créditos y Oro necesitas.</span>
               </div>
             </div>
           </div>
