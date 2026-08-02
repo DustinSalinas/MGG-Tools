@@ -331,6 +331,7 @@
 }
 
 .evo-res-icon { font-size: 1.8rem; }
+.evo-res-img { width: 44px; height: 44px; object-fit: contain; }
 .evo-res-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
 
 /* ── Right: Info panel ───────────────────────────────── */
@@ -384,7 +385,89 @@
   margin-top: 1px;
 }
 
+/* ── Mode Toggle ─────────────────────────────────────── */
+.evo-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
 
+.evo-mode-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.evo-mode-label::before { font-size: 1rem; }
+.evo-mode-label-left::before { content: '⚡'; }
+.evo-mode-label-right::before { content: '🎯'; }
+.evo-mode-label.active { color: var(--accent-primary, #4fc3f7); }
+
+.evo-mode-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.evo-mode-switch input { opacity: 0; width: 0; height: 0; }
+
+.evo-mode-slider {
+  position: absolute; cursor: pointer;
+  inset: 0; background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 24px; transition: 0.25s;
+}
+
+.evo-mode-slider::before {
+  content: '';
+  position: absolute;
+  height: 16px; width: 16px;
+  left: 3px; bottom: 3px;
+  background: var(--text-muted);
+  border-radius: 50%; transition: 0.25s;
+}
+
+.evo-mode-switch input:checked + .evo-mode-slider { background: var(--accent-primary, #4fc3f7); border-color: var(--accent-primary, #4fc3f7); }
+.evo-mode-switch input:checked + .evo-mode-slider::before { transform: translateX(20px); background: #fff; }
+
+/* ── Target mode: cost result ────────────────────────── */
+.evo-cost-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.evo-cost-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.evo-cost-icon {
+  width: 28px; height: 28px;
+  object-fit: contain;
+}
+
+.evo-cost-block .evo-res-val { font-size: 1.35rem; }
+
+.evo-cost-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 4px;
+}
 
 .evo-cost-lv {
   font-family: 'Rajdhani', sans-serif;
@@ -407,4 +490,6 @@
   .evo-discount-presets { flex-wrap: wrap; }
   .evo-result-main { gap: 12px; }
   .evo-res-val { font-size: 1.6rem; }
+  .evo-cost-grid { grid-template-columns: 1fr; }
+  .evo-mode-toggle { flex-wrap: wrap; }
 }
