@@ -201,6 +201,32 @@
   white-space: nowrap;
 }
 
+/* Gold star badge (bug double-attack mutants) */
+.top-gold-star {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-left: 6px;
+  display: inline-block;
+  filter: drop-shadow(0 0 4px rgba(240, 192, 64, 0.55));
+}
+
+/* Star pinned to the bottom-right of the mutant image in the table */
+.top-mutant-img-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.top-mutant-img-wrap .top-gold-star {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  margin-left: 0;
+  filter: drop-shadow(0 0 5px rgba(240, 192, 64, 0.65));
+}
+
 /* Type icon */
 .top-type-icon {
   width: 30px; height: 30px;
@@ -272,7 +298,7 @@
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-lg);
   width: 100%;
-  max-width: 480px;
+  max-width: 560px;
   max-height: 80vh;
   overflow-y: auto;
   align-self: center;
@@ -344,8 +370,9 @@
 .orb-combo-slots {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 20px;
   flex-wrap: wrap;
 }
 
@@ -353,26 +380,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .orb-slot {
-  width: 50px; height: 50px;
+  width: 76px; height: 76px;
   display: flex; align-items: center; justify-content: center;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.orb-slot:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 12px rgba(255,180,0,0.35));
 }
 
 .orb-slot img {
   width: 100%; height: 100%;
   object-fit: contain;
-  transform: scale(1.25);
+  transform: scale(1.2);
 }
 
 .orb-slot-name {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary);
   text-align: center;
@@ -381,14 +415,14 @@
 
 .orb-slot-pct {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent-gold);
 }
 
 .orb-separator {
   width: 1px;
-  height: 50px;
+  height: 76px;
   background: var(--border-color);
   margin: 0 4px;
   flex-shrink: 0;
@@ -431,10 +465,304 @@
 
 @keyframes top-spin { to { transform: rotate(360deg); } }
 
+/* ============================================================
+   MGG TOOLS — Top Mutants · Tier List
+   ============================================================ */
+
+/* ── View Switch (Top 10 / Tier List) ────────────────── */
+/* ── Tier Section ────────────────────────────────────── */
+.tier-section {
+  animation: fade-in 0.35s ease;
+}
+
+.tier-section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.tier-section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.tier-section-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.tier-placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+/* ── Tier Board & Rows ───────────────────────────────── */
+.tier-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tier-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  min-height: 92px;
+}
+
+.tier-label {
+  width: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.tier-splus .tier-label { background: linear-gradient(180deg, #f0c040, #c99a24); }
+.tier-s     .tier-label { background: linear-gradient(180deg, #e05050, #ad3333); }
+.tier-a     .tier-label { background: linear-gradient(180deg, #f0a030, #cc7d17); }
+.tier-b     .tier-label { background: linear-gradient(180deg, #4fa3e0, #2c73ae); }
+.tier-c     .tier-label { background: linear-gradient(180deg, #40c878, #258c4e); }
+.tier-d     .tier-label { background: linear-gradient(180deg, #556480, #3a4456); }
+
+.tier-slot {
+  flex: 1;
+  min-height: 90px;
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 14px;
+  transition: background var(--transition), outline-color var(--transition);
+}
+
+/* ── Tier Cards ──────────────────────────────────────── */
+.tier-card {
+  width: 74px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  position: relative;
+}
+
+.tier-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.tier-card > img {
+  width: 52px; height: 52px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  display: block;
+}
+
+.tier-card-name {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.15;
+  max-width: 70px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Gold star badge inside a tier card (pinned to corner) */
+.tier-card .top-gold-star {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  margin-left: 0;
+  filter: drop-shadow(0 0 4px rgba(240, 192, 64, 0.6));
+}
+
+/* ── Tier Tooltip ────────────────────────────────────── */
+.tier-tooltip {
+  position: fixed;
+  z-index: 1200;
+  width: 250px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.tier-tooltip.visible { opacity: 1; transform: translateY(0); }
+
+.tier-tooltip-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.tier-tooltip-head img {
+  width: 44px; height: 44px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.tier-tooltip-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.tier-tooltip-head .top-gold-star {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+
+.tier-tooltip-type {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.tier-tooltip-type img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.tier-tooltip-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.tier-stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.tier-stat-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tier-stat-icon-wrap img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.tier-stat-multi {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  opacity: 0.95;
+  margin-left: -15px;
+  margin-top: -2px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+}
+
+.tier-stat-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.tier-stat-ability {
+  grid-column: 1 / -1;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 8px;
+}
+
+.tier-stat-ability .tier-stat-icon-wrap {
+  width: 22px;
+  height: 22px;
+}
+
+.tier-stat-ability .tier-stat-icon-wrap img {
+  width: 20px;
+  height: 20px;
+}
+
+.tier-stat-sub {
+  font-size: 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-left: 0;
+}
+
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 600px) {
   .gene-selector { gap: 8px; padding: 14px; }
   .gene-btn { min-width: 56px; padding: 8px 8px; }
   .gene-btn img { width: 40px; height: 40px; }
   .gene-selector-divider { height: 44px; }
+  .tier-label { width: 48px; font-size: 1.05rem; }
+  .tier-card { width: 62px; }
+  .tier-card > img { width: 44px; height: 44px; }
+  .tier-slot { padding: 10px; }
 }
