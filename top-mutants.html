@@ -2,6 +2,14 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <script id="mgg-flash-fix">
+    (function() {
+      var theme = localStorage.getItem('mgg-theme') || 'dark';
+      var lang  = localStorage.getItem('mgg-lang')  || 'es';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-lang-pending', lang);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGG Tools — Top Mutants</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -119,13 +127,22 @@
         <!-- Buttons injected by JS after CSV loads -->
       </div>
 
-      <!-- Table output -->
+      <!-- Table output (Top 10 view) -->
       <div id="mutant-table-container">
         <div class="top-placeholder">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
           <p data-i18n="topSelectPrompt">Selecciona un gen para ver el Top 10</p>
         </div>
       </div>
+
+      <!-- Tier List view -->
+      <section class="tier-section" id="tierSection" hidden>
+        <div class="tier-section-header">
+          <span class="tier-section-title" data-i18n="tierTitle">Tier List</span>
+          <p class="tier-section-hint" data-i18n="tierHint">Haz clic en un mutante para ver su nombre.</p>
+        </div>
+        <div class="tier-board" id="tierBoard"></div>
+      </section>
     </main>
 
     <footer class="site-footer"></footer>
@@ -136,5 +153,6 @@
 <script src="js/app.js"></script>
 <script src="js/topmutants.js"></script>
 <script src="js/footer.js"></script>
+
 </body>
 </html>
