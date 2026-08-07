@@ -139,9 +139,27 @@
       <section class="tier-section" id="tierSection" hidden>
         <div class="tier-section-header">
           <span class="tier-section-title" data-i18n="tierTitle">Tier List</span>
-          <p class="tier-section-hint" data-i18n="tierHint">Haz clic en un mutante para ver su nombre.</p>
+          <p class="tier-section-hint" data-i18n="tierHint">Pasa el cursor sobre un mutante del Top para ver sus stats.</p>
         </div>
         <div class="tier-board" id="tierBoard"></div>
+
+        <!-- Pool: todos los mutantes (arrastrar al tier) -->
+        <div class="pool-section">
+          <div class="pool-header">
+            <span class="pool-title" data-i18n="tierPoolTitle">Todos los mutantes</span>
+            <div class="pool-controls">
+              <input type="search" id="poolSearch" class="pool-search" data-i18n="tierPoolSearch" placeholder="Buscar por nombre (ES/EN)..." autocomplete="off">
+              <button type="button" id="poolClear" class="pool-btn pool-clear" data-i18n="tierPoolClear">Vaciar</button>
+              <button type="button" id="poolReset" class="pool-btn pool-reset" data-i18n="tierPoolReset">Restablecer</button>
+              <button type="button" id="poolDownload" class="pool-btn pool-download" data-i18n="tierPoolDownload">Descargar imagen</button>
+            </div>
+          </div>
+          <div class="pool-gene-filter" id="poolGeneFilter">
+            <span class="pool-gene-label" data-i18n="tierPoolGeneLabel">Gen:</span>
+          </div>
+          <p class="pool-hint" data-i18n="tierPoolHint">Arrastra un mutante a un rango para colocarlo en el Top.</p>
+          <div class="pool-grid" id="mutantPool"></div>
+        </div>
       </section>
     </main>
 
