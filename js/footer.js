@@ -1,4 +1,4 @@
-const MGG_VERSION = 'v3.3';
+const MGG_VERSION = 'v3.5';
 
 (function injectFooter() {
   document.querySelectorAll('.site-footer').forEach(footer => {
