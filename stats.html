@@ -2,6 +2,14 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <script id="mgg-flash-fix">
+    (function() {
+      var theme = localStorage.getItem('mgg-theme') || 'dark';
+      var lang  = localStorage.getItem('mgg-lang')  || 'es';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-lang-pending', lang);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MGG Tools — Stats Simulator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -9,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/stats.css" />
+  <link rel="stylesheet" href="css/skins.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -141,7 +150,7 @@
             </div>
           </div>
 
-          <!-- Star selector — JS will prepend this into resultsContainer -->
+          <!-- Star selector - JS will prepend this into resultsContainer -->
           <div id="starLevelContainer" style="display:none;">
             <div class="ss-star-inline">
               <div class="star-dropdown">
@@ -180,6 +189,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/skins.js"></script>
 <script src="js/statscal.js"></script>
 <script src="js/footer.js"></script>
 
