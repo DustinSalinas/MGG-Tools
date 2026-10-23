@@ -810,6 +810,29 @@
 .cmp-table tbody tr:last-child .cmp-td-label,
 .cmp-table tbody tr:last-child .cmp-td-val { border-bottom: none; }
 
+/* Habilidad añadida por orbe especial, dentro de ABIL 1 / ABIL 2 */
+.cmp-val-extra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding-top: 6px;
+  border-top: 1px dashed color-mix(in srgb, var(--text-muted) 30%, transparent);
+}
+.cmp-val-extra-icon {
+  width: 34px; height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.cmp-val-extra-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+}
+
 .cmp-table tbody tr:hover .cmp-td-label { color: var(--text-secondary); }
 
 /* ── Value cells ────────────────────────────────────── */
